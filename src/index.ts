@@ -6,6 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
 import * as cors from 'cors';
 import { Routes } from './routes';
+import { errorHandler } from './middlewares/errorHandler';
 
 createConnection()
     .then(async (connection) => {
@@ -24,6 +25,8 @@ createConnection()
                 }
             });
         });
+
+        app.use(errorHandler);
 
         app.listen(3000);
 
