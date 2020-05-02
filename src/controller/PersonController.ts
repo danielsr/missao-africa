@@ -3,22 +3,22 @@ import { NextFunction, Request, Response } from 'express';
 import { Person } from '../entity/Person';
 
 export class PersonController {
-    private personRepository = getRepository(Person);
+    private repo = getRepository(Person);
 
-    async all(request: Request, response: Response, next: NextFunction) {
-        return this.personRepository.find();
+    async all(req: Request, res: Response, next: NextFunction) {
+        return this.repo.find();
     }
 
-    async one(request: Request, response: Response, next: NextFunction) {
-        return this.personRepository.findOne(request.params.id);
+    async one(req: Request, res: Response, next: NextFunction) {
+        return this.repo.findOne(req.params.id);
     }
 
-    async save(request: Request, response: Response, next: NextFunction) {
-        return this.personRepository.save(request.body);
+    async save(req: Request, res: Response, next: NextFunction) {
+        return this.repo.save(req.body);
     }
 
-    async remove(request: Request, response: Response, next: NextFunction) {
-        const userToRemove = await this.personRepository.findOne(request.params.id);
-        await this.personRepository.remove(userToRemove);
+    async remove(req: Request, res: Response, next: NextFunction) {
+        const userToRemove = await this.repo.findOne(req.params.id);
+        await this.repo.remove(userToRemove);
     }
 }
