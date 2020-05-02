@@ -1,9 +1,8 @@
-import {getRepository} from "typeorm";
-import {NextFunction, Request, Response} from "express";
-import {Person} from "../entity/Person";
+import { getRepository } from 'typeorm';
+import { NextFunction, Request, Response } from 'express';
+import { Person } from '../entity/Person';
 
 export class PersonController {
-
     private personRepository = getRepository(Person);
 
     async all(request: Request, response: Response, next: NextFunction) {
@@ -19,8 +18,7 @@ export class PersonController {
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let userToRemove = await this.personRepository.findOne(request.params.id);
+        const userToRemove = await this.personRepository.findOne(request.params.id);
         await this.personRepository.remove(userToRemove);
     }
-
 }

@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class Person {
-
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -11,7 +10,7 @@ export class Person {
 
     @Column({ nullable: true })
     email?: string | null;
-    
+
     @Column({ nullable: true })
     phone?: string | null;
 }
