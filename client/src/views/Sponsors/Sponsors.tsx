@@ -1,25 +1,28 @@
 import React from 'react';
 import Title from '../../components/Title';
 import InputFile from '../../components/InputFile';
-import { importSponsors } from './sponsorsHelper';
+import { useSponsors } from './useSponsors';
 
 function Sponsors() {
+    const { sponsors, importSponsors, error } = useSponsors();
+
     return (
         <div>
             <Title title="Sponsors" />
             <InputFile onChange={importSponsors} />
+            {error && <span>{error}</span>}
             <table className="table-auto">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>Daniel</td>
-                    </tr>
+                    {sponsors?.map((sponsor, index) => (
+                        <tr key={`Sponsor_Row_${index}`}>
+                            <td>{sponsor[1]}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
