@@ -6,6 +6,7 @@
 
 ## Frontend
 
+[ ] Grid padding
 [ ] Tailwind bundle size
 [ ] Axios config including token auth
 

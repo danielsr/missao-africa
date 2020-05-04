@@ -4,6 +4,7 @@ export type GridField = {
     name: string;
     label: string;
     align?: string;
+    renderFunction?: Function;
 };
 
 type GridProps = {
@@ -28,7 +29,7 @@ function renderRows(fields: GridField[], data: any[]) {
         <tr key={`Grid_Row_${index}`} className="odd:bg-gray-200 hover:bg-gray-300">
             {fields.map((field) => (
                 <td key={`Grid_Row_${index}_${field.name}`} className="text-left">
-                    {row[field.name]}
+                    {field.renderFunction ? field.renderFunction(row) : row[field.name]}
                 </td>
             ))}
         </tr>
