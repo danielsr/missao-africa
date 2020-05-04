@@ -5,7 +5,12 @@ export function useSponsors() {
     const [sponsors, setSponsors]: [string[][], Function] = useState([]);
     const [error, setError]: [string | null, Function] = useState(null);
 
-    const importSponsors = (event: ChangeEvent<HTMLInputElement>): void =>
+    const importSponsors = (event: ChangeEvent<HTMLInputElement>): void => {
+        if (!event.target.files?.[0]) {
+            setError('No file');
+            setSponsors([]);
+            return;
+        }
         Papa.parse(event.target.files?.[0], {
             complete: function (results) {
                 if (results.errors.length > 0) {
@@ -21,6 +26,8 @@ export function useSponsors() {
                 setSponsors([]);
             },
         });
+    };
+
     return {
         sponsors,
         importSponsors,

@@ -11,20 +11,24 @@ function Sponsors() {
             <Title title="Sponsors" />
             <InputFile onChange={importSponsors} />
             {error && <span>{error}</span>}
-            <table className="table-auto">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sponsors?.map((sponsor, index) => (
-                        <tr key={`Sponsor_Row_${index}`}>
-                            <td>{sponsor[1]}</td>
+            {sponsors.length > 0 && !error && (
+                <table className="table-auto">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {sponsors?.map((sponsor, index) => (
+                            <tr key={`Sponsor_Row_${index}`}>
+                                <td>{sponsor[1]}</td>
+                                <td>{sponsor[3]}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </div>
     );
 }
