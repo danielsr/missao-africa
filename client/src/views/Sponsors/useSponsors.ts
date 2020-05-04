@@ -1,8 +1,16 @@
 import { useState, ChangeEvent } from 'react';
 import Papa from 'papaparse';
+import { Sponsor } from '../../types';
+
+function mapSponsors(sponsorsArray: string[][]): Sponsor[] {
+    return sponsorsArray.map((row) => ({
+        name: row[1],
+        email: row[3],
+    }));
+}
 
 export function useSponsors() {
-    const [sponsors, setSponsors]: [string[][], Function] = useState([]);
+    const [sponsors, setSponsors]: [Sponsor[], Function] = useState([]);
     const [error, setError]: [string | null, Function] = useState(null);
 
     const importSponsors = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -18,7 +26,7 @@ export function useSponsors() {
                     setSponsors([]);
                 } else {
                     setError(null);
-                    setSponsors(results.data);
+                    setSponsors(mapSponsors(results.data));
                 }
             },
             error: function (error) {
