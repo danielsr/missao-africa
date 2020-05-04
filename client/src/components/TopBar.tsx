@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function TopBar() {
     return (
@@ -6,8 +7,12 @@ function TopBar() {
             <div className="container flex justify-between items-center">
                 <div className="text-white text-2xl">Missao Africa</div>
                 <div className="text-white flex-1 ml-12 mt-1 text-sm">
-                    <span className="mr-4">Sponsors</span>
-                    <span className="mr-4">Boletos</span>
+                    <Link to="/sponsors" className="mr-4">
+                        Sponsors
+                    </Link>
+                    <Link to="/boletos" className="mr-4">
+                        Boletos
+                    </Link>
                 </div>
                 <div className="text-white">Carolina</div>
             </div>
