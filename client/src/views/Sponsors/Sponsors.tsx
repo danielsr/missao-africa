@@ -1,10 +1,13 @@
 import React from 'react';
-import Title from '../components/Title';
+import Title from '../../components/Title';
+import InputFile from '../../components/InputFile';
+import { importSponsors } from './sponsorsHelper';
 
 function Sponsors() {
     return (
         <div>
             <Title title="Sponsors" />
+            <InputFile onChange={importSponsors} />
             <table className="table-auto">
                 <thead>
                     <tr>
