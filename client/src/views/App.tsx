@@ -6,10 +6,10 @@ import Routes from './Routes';
 function App() {
     return (
         <Router>
-            <div className="bg-gray-300 h-screen">
+            <div className="bg-gray-300 min-h-screen">
                 <TopBar />
                 <div className="flex justify-center">
-                    <div className="mt-24 container">
+                    <div className="mt-24 mb-8 container">
                         <div className="bg-white shadow-md rounded p-4">
                             <Routes />
                         </div>
