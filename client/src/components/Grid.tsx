@@ -16,7 +16,7 @@ function renderHeader(fields: GridField[]) {
     return (
         <tr>
             {fields.map((field) => (
-                <th key={`Grid_Header_${field.name}`} className="text-left">
+                <th key={`Grid_Header_${field.name}`} className="text-left p-1">
                     {field.label}
                 </th>
             ))}
@@ -28,7 +28,7 @@ function renderRows(fields: GridField[], data: any[]) {
     return data.map((row, index) => (
         <tr key={`Grid_Row_${index}`} className="odd:bg-gray-200 hover:bg-gray-300">
             {fields.map((field) => (
-                <td key={`Grid_Row_${index}_${field.name}`} className="text-left">
+                <td key={`Grid_Row_${index}_${field.name}`} className="text-left p-1">
                     {field.renderFunction ? field.renderFunction(row) : row[field.name]}
                 </td>
             ))}
@@ -38,7 +38,7 @@ function renderRows(fields: GridField[], data: any[]) {
 
 function Grid({ fields, data }: GridProps) {
     return (
-        <table className="table-auto">
+        <table className="table-auto text-sm">
             <thead>{renderHeader(fields)}</thead>
             <tbody>{renderRows(fields, data)}</tbody>
         </table>

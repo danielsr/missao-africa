@@ -3,7 +3,7 @@ import Papa from 'papaparse';
 import { Sponsor } from '../../types';
 
 function mapSponsors(sponsorsArray: string[][]): Sponsor[] {
-    return sponsorsArray.map((row) => ({
+    return sponsorsArray.slice(1).map((row) => ({
         name: row[1],
         email: row[3],
     }));
