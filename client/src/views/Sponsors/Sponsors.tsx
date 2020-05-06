@@ -3,6 +3,7 @@ import Title from '../../components/Title';
 import InputFile from '../../components/InputFile';
 import { useSponsors } from './useSponsors';
 import Grid, { GridField } from '../../components/Grid';
+import Button from '../../components/Button';
 
 function Sponsors() {
     const { sponsors, importSponsors, error } = useSponsors();
@@ -17,8 +18,8 @@ function Sponsors() {
             <div className="flex justify-between py-4">
                 <div>Search</div>
                 <div>
-                    <button className="border-0 p-2 bg-gray-700 text-white rounded mr-2 text-sm">New Sponsor</button>
-                    <button className="border-0 p-2 bg-gray-700 text-white rounded text-sm">Import Sponsors</button>
+                    <Button label="New Sponsor" onClick={() => console.log('...')} />
+                    <Button label="Import Sponsors" onClick={() => console.log('...')} />
                 </div>
             </div>
             <InputFile onChange={importSponsors} />
