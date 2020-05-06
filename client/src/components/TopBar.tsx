@@ -14,7 +14,7 @@ function TopBar() {
                         Boletos
                     </Link>
                 </div>
-                <div className="text-white">Carolina</div>
+                <div className="text-white">Ana Carolina</div>
             </div>
         </div>
     );

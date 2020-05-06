@@ -1,30 +1,24 @@
 import React from 'react';
 import Title from '../../components/Title';
-import InputFile from '../../components/InputFile';
-import { useSponsors } from './useSponsors';
-import Grid, { GridField } from '../../components/Grid';
 import Button from '../../components/Button';
+import { useHistory } from 'react-router-dom';
+import Input from '../../components/Input';
 
 function Sponsors() {
-    const { sponsors, importSponsors, error } = useSponsors();
-    const fields: GridField[] = [
-        { name: 'name', label: 'Name' },
-        { name: 'email', label: 'Email' },
-    ];
+    const history = useHistory();
 
     return (
         <div>
             <Title title="Sponsors" />
             <div className="flex justify-between py-4">
-                <div>Search</div>
+                <div className="flex-1">
+                    <Input placeHolder="Search sponsors..." className="w-1/2" />
+                </div>
                 <div>
                     <Button label="New Sponsor" onClick={() => console.log('...')} />
-                    <Button label="Import Sponsors" onClick={() => console.log('...')} />
+                    <Button label="Import Sponsors" onClick={() => history.push('/sponsors-import')} />
                 </div>
             </div>
-            <InputFile onChange={importSponsors} />
-            {error && <span>{error}</span>}
-            {sponsors.length > 0 && !error && <Grid fields={fields} data={sponsors} />}
         </div>
     );
 }

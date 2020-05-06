@@ -8,8 +8,8 @@ export const useForm = (initialValues: object) => {
         reset: (field: string) => setValues({ ...values, [field]: null }),
         bind: (field: string) => ({
             value: values?.[field],
-            onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-                setValues({ ...values, [field]: event.target.value });
+            onChange: (newValue: string) => {
+                setValues({ ...values, [field]: newValue });
             },
         }),
     };
