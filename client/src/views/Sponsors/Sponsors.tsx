@@ -15,7 +15,7 @@ function Sponsors() {
                     <Input placeHolder="Search sponsors..." className="w-1/2" />
                 </div>
                 <div>
-                    <Button label="New Sponsor" onClick={() => console.log('...')} />
+                    <Button label="New Sponsor" onClick={() => history.push('/sponsors-edit/0')} />
                     <Button label="Import Sponsors" onClick={() => history.push('/sponsors-import')} />
                 </div>
             </div>
