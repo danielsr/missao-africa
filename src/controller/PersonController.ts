@@ -19,6 +19,14 @@ export class PersonController {
         return this.repo.save(req.body);
     }
 
+    async import(req: Request, res: Response, next: NextFunction) {
+        const persons = req.body as Person[];
+        persons.map(async (person) => {
+            await this.repo.save(person);
+        });
+        return { count: persons.length };
+    }
+
     async remove(req: Request, res: Response, next: NextFunction) {
         const person = await this.repo.findOne(req.params.id);
         await this.repo.remove(person);

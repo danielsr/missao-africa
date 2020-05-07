@@ -28,7 +28,7 @@ createConnection()
 
         app.use(errorHandler);
 
-        app.listen(3000);
+        app.listen(3001);
 
         console.log('Express server has started on port 3000.');
     })

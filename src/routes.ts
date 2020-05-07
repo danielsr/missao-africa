@@ -20,6 +20,12 @@ export const Routes = [
         action: 'save',
     },
     {
+        method: 'post',
+        route: '/persons-import',
+        controller: PersonController,
+        action: 'import',
+    },
+    {
         method: 'delete',
         route: '/persons/:id',
         controller: PersonController,

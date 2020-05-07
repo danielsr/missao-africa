@@ -5,6 +5,7 @@ import InputFile from '../../components/InputFile';
 import { useSponsors } from './useSponsors';
 import Grid, { GridField } from '../../components/Grid';
 import Button from '../../components/Button';
+import api from '../../services/api';
 
 function SponsorsImport() {
     const history = useHistory();
@@ -20,7 +21,11 @@ function SponsorsImport() {
             <div className="flex justify-between py-4">
                 <div></div>
                 <div>
-                    <Button label="Import" onClick={() => console.log('...')} disabled={sponsors.length === 0} />
+                    <Button
+                        label="Import"
+                        onClick={() => api.importSponsors(sponsors)}
+                        disabled={sponsors.length === 0}
+                    />
                     <Button label="Cancel" onClick={() => history.push('/sponsors')} />
                 </div>
             </div>
