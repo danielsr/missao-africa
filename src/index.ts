@@ -28,8 +28,8 @@ createConnection()
 
         app.use(errorHandler);
 
-        app.listen(3001);
-
-        console.log('Express server has started on port 3000.');
+        const port = 3001;
+        app.listen(port);
+        console.log(`Express server has started on port ${port}.`);
     })
     .catch((error) => console.log(error));

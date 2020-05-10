@@ -1,4 +1,4 @@
-import { getRepository } from 'typeorm';
+import { getRepository, Like } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
 import { Person } from '../entity/Person';
 import { NotFound } from '../middlewares/errorHandler';
@@ -7,7 +7,7 @@ export class PersonController {
     private repo = getRepository(Person);
 
     async all(req: Request, res: Response, next: NextFunction) {
-        return this.repo.find();
+        return this.repo.find({ name: Like(`%${req.query.search}%`) });
     }
 
     async one(req: Request, res: Response, next: NextFunction) {

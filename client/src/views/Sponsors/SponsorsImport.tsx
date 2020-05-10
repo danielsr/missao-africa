@@ -2,14 +2,14 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Title from '../../components/Title';
 import InputFile from '../../components/InputFile';
-import { useSponsors } from './useSponsors';
+import { useImportSponsors } from './useImportSponsors';
 import Grid, { GridField } from '../../components/Grid';
 import Button from '../../components/Button';
 import api from '../../services/api';
 
 function SponsorsImport() {
     const history = useHistory();
-    const { sponsors, importSponsors, error } = useSponsors();
+    const { sponsors, importSponsors, error } = useImportSponsors();
     const fields: GridField[] = [
         { name: 'name', label: 'Name' },
         { name: 'email', label: 'Email' },

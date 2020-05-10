@@ -3,17 +3,19 @@
 [ ] Token Auth
 [ ] Serve built client files with Express
 [ ] Use my own cors handler
+[ ] Create the Role definition (Sponsor, Voluntier)
 
 ## Frontend
 
-[ ] Grid padding
+[ ] List sponsors
+[ ] New sponsor
+[ ] Edit sponsor
+[ ] Avoid duplicates
+[ ] Validate CPF
+[ ] Import all fields
 [ ] Tailwind bundle size
 [ ] Axios config including token auth
 
 ## DevOps
 
 [ ] Deploy to heroku
-
-## General
-
-[ ] Sketch layout and pages
