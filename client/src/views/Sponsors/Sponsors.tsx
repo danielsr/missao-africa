@@ -8,7 +8,7 @@ import Grid, { GridField } from '../../components/Grid';
 
 function Sponsors() {
     const history = useHistory();
-    const { sponsors, bindSearch } = useSponsors();
+    const { sponsors, bindInputSearch } = useSponsors();
 
     const fields: GridField[] = [
         { name: 'name', label: 'Name' },
@@ -20,7 +20,7 @@ function Sponsors() {
             <Title title="Sponsors" />
             <div className="flex justify-between py-4">
                 <div className="flex-1">
-                    <Input placeHolder="Search sponsors..." className="w-1/2" {...bindSearch} />
+                    <Input placeHolder="Search sponsors..." className="w-1/2" {...bindInputSearch} />
                 </div>
                 <div>
                     <Button label="New Sponsor" onClick={() => history.push('/sponsors-edit/0')} />

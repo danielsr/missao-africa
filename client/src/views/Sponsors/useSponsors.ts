@@ -7,7 +7,7 @@ import useDebounce from '../../hooks/useDebounce';
 export default function useSponsors() {
     const [sponsors, setSponsors]: [Sponsor[], Function] = useState([]);
     const [error, setError]: [string | null, Function] = useState(null);
-    const { values, bind } = useForm({ search: '' });
+    const { values, bindInput } = useForm({ search: '' });
     const debouncedSearch = useDebounce(values.search, 500);
 
     useEffect(() => {
@@ -26,6 +26,6 @@ export default function useSponsors() {
     return {
         sponsors,
         error,
-        bindSearch: bind('search'),
+        bindInputSearch: bindInput('search'),
     };
 }
