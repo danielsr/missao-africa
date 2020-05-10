@@ -7,10 +7,10 @@ export type GridField = {
     renderFunction?: Function;
 };
 
-type GridProps = {
+export interface GridProps {
     fields: GridField[];
     data: any[];
-};
+}
 
 function renderHeader(fields: GridField[]) {
     return (
