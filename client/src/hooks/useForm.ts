@@ -5,6 +5,7 @@ export default function useForm(initialValues: object) {
 
     return {
         values,
+        setValues,
         reset: (field: string) => setValues({ ...values, [field]: null }),
         bindInput: (field: string) => ({
             value: values?.[field],

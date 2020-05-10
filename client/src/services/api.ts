@@ -13,4 +13,7 @@ export default {
         query.append('search', search);
         return axios.get(`/persons?${query.toString()}`);
     },
+    getSponsor(id: number) {
+        return axios.get(`/persons/${id}`);
+    },
 };

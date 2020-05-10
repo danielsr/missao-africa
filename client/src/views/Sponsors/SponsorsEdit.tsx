@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
-import { useHistory } from 'react-router-dom';
 import Input from '../../components/Input';
 import useForm from '../../hooks/useForm';
 import api from '../../services/api';
 
 function SponsorsEdit() {
     const history = useHistory();
-    const { values, bindInput } = useForm({ name: '', email: '' });
+    const { id } = useParams();
+    const { values, setValues, bindInput } = useForm({ name: '', email: '' });
+
     const save = async () => {
         try {
             await api.saveSponsors(values);
@@ -17,6 +19,16 @@ function SponsorsEdit() {
             console.log(error);
         }
     };
+
+    useEffect(() => {
+        const fetchSponsor = async () => {
+            if (id > 0) {
+                const resp = await api.getSponsor(id);
+                setValues(resp.data);
+            }
+        };
+        fetchSponsor();
+    }, [id, setValues]);
 
     return (
         <div>

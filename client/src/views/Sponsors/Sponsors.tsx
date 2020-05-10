@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -9,10 +9,20 @@ import Grid, { GridField } from '../../components/Grid';
 function Sponsors() {
     const history = useHistory();
     const { sponsors, setSearch, search } = useSponsors();
-
     const fields: GridField[] = [
         { name: 'name', label: 'Name' },
         { name: 'email', label: 'Email' },
+        {
+            name: 'edit',
+            label: 'Edit',
+            renderFunction(row) {
+                return (
+                    <Link className="underline text-blue-700" to={`/sponsors-edit/${row.id}`}>
+                        Edit
+                    </Link>
+                );
+            },
+        },
     ];
 
     return (
