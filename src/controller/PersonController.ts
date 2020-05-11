@@ -2,20 +2,18 @@ import { getRepository, Like, SelectQueryBuilder } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
 import { Person } from '../entity/Person';
 import { NotFound } from '../middlewares/errorHandler';
-import { getPageInfo } from '../util';
+import { paginate } from '../util';
 
 export class PersonController {
     private repo = getRepository(Person);
 
     async all(req: Request, res: Response, next: NextFunction) {
-        const { pageSize, pageIndex, pagedResponse } = getPageInfo(req);
-        const result = await this.repo
+        const search = `%${req.query.search ? req.query.search.toString().toLowerCase() : ''}%`;
+        const queryBuilder = this.repo
             .createQueryBuilder('persons')
-            .skip(pageSize * (pageIndex - 1))
-            .take(pageSize)
-            .orderBy('id')
-            .getManyAndCount();
-        return pagedResponse(result);
+            .where('LOWER(persons.name) like :search or LOWER(persons.email) like :search', { search })
+            .orderBy('id');
+        return paginate(req, queryBuilder);
     }
 
     async one(req: Request, res: Response, next: NextFunction) {

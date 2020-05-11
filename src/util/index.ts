@@ -1,8 +1,13 @@
 import { Request } from 'express';
+import { SelectQueryBuilder } from 'typeorm';
 
-export function getPageInfo(req: Request) {
+export async function paginate<T>(req: Request, queryBuilder: SelectQueryBuilder<T>) {
     const pageSize = 15;
     const pageIndex = req.query.pageIndex ? parseInt(req.query.pageIndex.toString()) : 1;
-    const pagedResponse = (result) => ({ items: result[0], pageSize, pageIndex, totalCount: result[1] });
-    return { pageSize, pageIndex, pagedResponse };
+    const result = await queryBuilder
+        .skip(pageSize * (pageIndex - 1))
+        .take(pageSize)
+        .getManyAndCount();
+
+    return { items: result[0], pageSize, pageIndex, totalCount: result[1] };
 }
