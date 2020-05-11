@@ -6,10 +6,11 @@ import Input from '../../components/Input';
 import useSponsors from './useSponsors';
 import { GridField } from '../../components/Grid';
 import GridEdit from '../../components/GridEdit';
+import Pagination from '../../components/Pagination';
 
 function Sponsors() {
     const history = useHistory();
-    const { sponsors, setSearch, search } = useSponsors();
+    const { sponsors, setSearch, search, pagination, setPageIndex } = useSponsors();
     const fields: GridField[] = [
         { name: 'name', label: 'Name' },
         { name: 'email', label: 'Email' },
@@ -28,6 +29,7 @@ function Sponsors() {
                 </div>
             </div>
             <GridEdit data={sponsors} fields={fields} editRoute="/sponsors-edit" />
+            <Pagination {...pagination} onChange={setPageIndex} />
         </div>
     );
 }
