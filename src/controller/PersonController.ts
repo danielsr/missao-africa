@@ -1,13 +1,21 @@
-import { getRepository, Like } from 'typeorm';
+import { getRepository, Like, SelectQueryBuilder } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
 import { Person } from '../entity/Person';
 import { NotFound } from '../middlewares/errorHandler';
+import { getPageInfo } from '../util';
 
 export class PersonController {
     private repo = getRepository(Person);
 
     async all(req: Request, res: Response, next: NextFunction) {
-        return this.repo.find({ name: Like(`%${req.query.search}%`) });
+        const { pageSize, pageIndex, pagedResponse } = getPageInfo(req);
+        const result = await this.repo
+            .createQueryBuilder('persons')
+            .skip(pageSize * (pageIndex - 1))
+            .take(pageSize)
+            .orderBy('id')
+            .getManyAndCount();
+        return pagedResponse(result);
     }
 
     async one(req: Request, res: Response, next: NextFunction) {

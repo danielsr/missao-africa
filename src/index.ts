@@ -6,7 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
 import * as cors from 'cors';
 import { Routes } from './routes';
-import { errorHandler } from './middlewares/errorHandler';
+import { errorHandler, GenericError } from './middlewares/errorHandler';
 
 createConnection()
     .then(async (connection) => {
@@ -19,9 +19,9 @@ createConnection()
             (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
                 const result = new (route.controller as any)()[route.action](req, res, next);
                 if (result instanceof Promise) {
-                    result.then((result) => (result !== null && result !== undefined ? res.send(result) : undefined));
-                } else if (result !== null && result !== undefined) {
-                    res.json(result);
+                    result.then((result) => res.send(result)).catch((error) => next(GenericError(error)));
+                } else {
+                    res.send(result);
                 }
             });
         });
