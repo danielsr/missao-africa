@@ -7,15 +7,20 @@
 
 ## Frontend
 
-[x] List sponsors
-[ ] New sponsor
-[ ] Edit sponsor
+[ ] Persist query parameters
+[ ] Pagination
 [ ] Avoid duplicates
 [ ] Validate CPF
 [ ] Import all fields
 [ ] Tailwind bundle size
+[ ] Delete sponsor
+[ ] Import feedback
 [ ] Axios config including token auth
 
 ## DevOps
 
 [ ] Deploy to heroku
+
+## General
+
+[ ] Boleto bancario API docs

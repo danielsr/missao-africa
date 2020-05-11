@@ -8,9 +8,10 @@ export default {
     saveSponsors(sponsor: Sponsor) {
         return axios.post('/persons', sponsor);
     },
-    getSponsors(search) {
+    getSponsors(search: string, pageIndex) {
         const query = new URLSearchParams();
         query.append('search', search);
+        query.append('pageIndex', pageIndex);
         return axios.get(`/persons?${query.toString()}`);
     },
     getSponsor(id: number) {
