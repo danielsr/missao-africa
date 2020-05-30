@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Sponsor } from '../../types';
 import api from '../../services/api';
@@ -19,33 +19,35 @@ export default function useSponsors() {
 
     const debouncedSearch = useDebounce(search, 500);
 
-    const getSponsors = async (): Promise<Sponsor[] | null> => {
-        try {
-            setIsLoading(true);
-            const resp = await api.getSponsors(debouncedSearch, pageIndex);
-            const { items, pageSize, totalCount } = resp.data;
-            const thereIsMore = totalCount / pageSize > pageIndex;
-            setHasMore(thereIsMore);
-            return items;
-        } catch (error) {
-            setError('Failed to fetch sponsors');
-            return null;
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    const getSponsors = useCallback(
+        async (pageIndex): Promise<Sponsor[] | null> => {
+            try {
+                setIsLoading(true);
+                const resp = await api.getSponsors(debouncedSearch, pageIndex);
+                const { items, pageSize, totalCount } = resp.data;
+                const lastPage = Math.ceil(totalCount / pageSize);
+                setPageIndex(pageIndex);
+                setHasMore(lastPage > pageIndex);
+                return items;
+            } catch (error) {
+                setError('Failed to fetch sponsors');
+                return null;
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [debouncedSearch],
+    );
 
     useEffect(() => {
-        setPageIndex(1);
-        getSponsors().then((items) => {
+        getSponsors(1).then((items) => {
             setSponsors(items);
             history.replace(`/sponsors?search=${debouncedSearch}`);
         });
-    }, [debouncedSearch, setPageIndex]);
+    }, [debouncedSearch, setPageIndex, getSponsors, history]);
 
     const loadMore = () => {
-        setPageIndex(pageIndex + 1);
-        getSponsors().then((items) => {
+        getSponsors(pageIndex + 1).then((items) => {
             items && setSponsors([...sponsors, ...items]);
         });
     };

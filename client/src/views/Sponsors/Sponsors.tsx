@@ -24,7 +24,7 @@ function Sponsors() {
                 loadMore();
             }
         },
-        [loadMore],
+        [loadMore, hasMore, isLoading],
     );
 
     useEffect(() => {
@@ -61,7 +61,7 @@ function Sponsors() {
                 </div>
             </div>
             <GridEdit data={sponsors} fields={fields} editRoute="/sponsors-edit" />
-            <div ref={loader}>Loading...</div>
+            <div ref={loader}>{hasMore && <div>Loading...</div>}</div>
         </div>
     );
 }
