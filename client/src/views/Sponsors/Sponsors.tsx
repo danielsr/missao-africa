@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
@@ -8,6 +8,7 @@ import GridEdit from '../../components/GridEdit';
 import useFetch from '../../hooks/useFetch';
 import api from '../../services/api';
 import { Sponsor } from '../../types';
+import InfiniteScroll from '../../components/InfiniteScroll';
 
 function Sponsors() {
     const history = useHistory();
@@ -16,39 +17,6 @@ function Sponsors() {
         { name: 'name', label: 'Name' },
         { name: 'email', label: 'Email' },
     ];
-
-    const loader = useRef(null);
-
-    const loadMoreCallback = useCallback(
-        (entries) => {
-            const target = entries[0];
-            if (target.isIntersecting && hasMore && !isLoading) {
-                loadMore();
-            }
-        },
-        [loadMore, hasMore, isLoading],
-    );
-
-    useEffect(() => {
-        const options = {
-            root: null, // window by default
-            rootMargin: '0px',
-            threshold: 0.25,
-        };
-
-        // Create observer
-        const observer = new IntersectionObserver(loadMoreCallback, options);
-
-        const element = loader.current as any;
-
-        // observer the loader
-        if (loader && loader.current) {
-            observer.observe(element);
-        }
-
-        // clean up on willUnMount
-        return () => observer.unobserve(element);
-    }, [loader, loadMoreCallback]);
 
     return (
         <div>
@@ -63,7 +31,7 @@ function Sponsors() {
                 </div>
             </div>
             <GridEdit data={sponsors} fields={fields} editRoute="/sponsors-edit" />
-            <div ref={loader}>{hasMore && <div>Loading...</div>}</div>
+            <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={loadMore} />
         </div>
     );
 }
