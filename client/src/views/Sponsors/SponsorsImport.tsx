@@ -8,32 +8,32 @@ import Button from '../../components/Button';
 import api from '../../services/api';
 
 function SponsorsImport() {
-    const history = useHistory();
-    const { sponsors, importSponsors, error } = useImportSponsors();
-    const fields: GridField[] = [
-        { name: 'name', label: 'Name' },
-        { name: 'email', label: 'Email' },
-    ];
+  const history = useHistory();
+  const { sponsors, importSponsors, error } = useImportSponsors();
+  const fields: GridField[] = [
+    { name: 'name', label: 'Name' },
+    { name: 'email', label: 'Email' },
+  ];
 
-    return (
+  return (
+    <div>
+      <Title title="Import Sponsors" />
+      <div className="flex justify-between py-4">
+        <div></div>
         <div>
-            <Title title="Import Sponsors" />
-            <div className="flex justify-between py-4">
-                <div></div>
-                <div>
-                    <Button
-                        label="Import"
-                        onClick={() => api.importSponsors(sponsors)}
-                        disabled={sponsors.length === 0}
-                    />
-                    <Button label="Cancel" onClick={() => history.push('/sponsors')} />
-                </div>
-            </div>
-            <InputFile onChange={importSponsors} />
-            {error && <span>{error}</span>}
-            {sponsors.length > 0 && !error && <Grid fields={fields} data={sponsors} />}
+          <Button
+            label="Import"
+            onClick={() => api.importSponsors(sponsors)}
+            disabled={sponsors.length === 0}
+          />
+          <Button label="Cancel" onClick={() => history.push('/sponsors')} />
         </div>
-    );
+      </div>
+      <InputFile onChange={importSponsors} />
+      {error && <span>{error}</span>}
+      {sponsors.length > 0 && !error && <Grid fields={fields} data={sponsors} />}
+    </div>
+  );
 }
 
 export default SponsorsImport;

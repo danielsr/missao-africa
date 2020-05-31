@@ -7,29 +7,36 @@ import api from '../../services/api';
 import { Sponsor } from '../../types';
 
 function Sponsors() {
-    const history = useHistory();
-    const { items: sponsors, setSearch, search, loadMore, hasMore, isLoading } = useFetch<Sponsor>(api.getSponsors);
-    const fields: GridField[] = [
-        { name: 'name', label: 'Name' },
-        { name: 'email', label: 'Email' },
-    ];
+  const history = useHistory();
+  const { items: sponsors, setSearch, search, loadMore, hasMore, isLoading } = useFetch<Sponsor>(
+    api.getSponsors
+  );
+  const fields: GridField[] = [
+    { name: 'name', label: 'Name' },
+    { name: 'email', label: 'Email' },
+  ];
 
-    return (
-        <div>
-            <Title title="Sponsors" />
-            <div className="flex justify-between py-4">
-                <div className="flex-1">
-                    <Input placeHolder="Search sponsors..." className="w-1/2" value={search} onChange={setSearch} />
-                </div>
-                <div>
-                    <Button label="New Sponsor" onClick={() => history.push('/sponsors-edit/0')} />
-                    <Button label="Import Sponsors" onClick={() => history.push('/sponsors-import')} />
-                </div>
-            </div>
-            <GridEdit data={sponsors} fields={fields} editRoute="/sponsors-edit" />
-            <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={loadMore} />
+  return (
+    <div>
+      <Title title="Sponsors" />
+      <div className="flex justify-between py-4">
+        <div className="flex-1">
+          <Input
+            placeHolder="Search sponsors..."
+            className="w-1/2"
+            value={search}
+            onChange={setSearch}
+          />
         </div>
-    );
+        <div>
+          <Button label="New Sponsor" onClick={() => history.push('/sponsors-edit/0')} />
+          <Button label="Import Sponsors" onClick={() => history.push('/sponsors-import')} />
+        </div>
+      </div>
+      <GridEdit data={sponsors} fields={fields} editRoute="/sponsors-edit" />
+      <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={loadMore} />
+    </div>
+  );
 }
 
 export default Sponsors;
