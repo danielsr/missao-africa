@@ -1,10 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Title from '../../components/Title';
-import InputFile from '../../components/InputFile';
 import { useImportSponsors } from './useImportSponsors';
 import Grid, { GridField } from '../../components/Grid';
-import Button from '../../components/Button';
+import { Button, InputFile, Title } from '../../components';
 import api from '../../services/api';
 
 function SponsorsImport() {

@@ -7,8 +7,9 @@
 
 ## Frontend
 
-[ ] Persist query parameters
-[ ] Pagination
+[x] Persist query parameters
+[x] Pagination
+[ ] Testing library
 [ ] Avoid duplicates
 [ ] Validate CPF
 [ ] Import all fields
@@ -19,7 +20,7 @@
 
 ## DevOps
 
-[ ] Deploy to heroku
+[ ] Deploy to heroku or Netlify
 
 ## General
 

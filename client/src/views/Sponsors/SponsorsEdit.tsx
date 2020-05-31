@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import Title from '../../components/Title';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
+import { Button, Title, Input } from '../../components';
 import useForm from '../../hooks/useForm';
 import api from '../../services/api';
 
