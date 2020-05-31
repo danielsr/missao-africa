@@ -40,7 +40,7 @@ export default function useFetch<T>(apiCall: Function) {
     useEffect(() => {
         getItems(1).then((newItems) => {
             setItems(newItems);
-            history.replace(`/sponsors?search=${debouncedSearch}`);
+            history.replace(`?search=${debouncedSearch}`);
         });
     }, [debouncedSearch, getItems, history]);
 
