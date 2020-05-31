@@ -3,13 +3,15 @@ import { useHistory } from 'react-router-dom';
 import Title from '../../components/Title';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import useSponsors from './useSponsors';
 import { GridField } from '../../components/Grid';
 import GridEdit from '../../components/GridEdit';
+import useFetch from '../../hooks/useFetch';
+import api from '../../services/api';
+import { Sponsor } from '../../types';
 
 function Sponsors() {
     const history = useHistory();
-    const { sponsors, setSearch, search, loadMore, hasMore, isLoading } = useSponsors();
+    const { items: sponsors, setSearch, search, loadMore, hasMore, isLoading } = useFetch<Sponsor>(api.getSponsors);
     const fields: GridField[] = [
         { name: 'name', label: 'Name' },
         { name: 'email', label: 'Email' },

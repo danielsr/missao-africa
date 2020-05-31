@@ -1,59 +1,57 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Sponsor } from '../../types';
-import api from '../../services/api';
-import useDebounce from '../../hooks/useDebounce';
-import useQuery from '../../hooks/useQuery';
+import useDebounce from '../hooks/useDebounce';
+import useQuery from '../hooks/useQuery';
 
-export default function useSponsors() {
+export default function useFetch<T>(apiCall: Function) {
     const history = useHistory();
     const query = useQuery();
     const searchQuery = query.get('search') || '';
 
     const [pageIndex, setPageIndex]: [number, Function] = useState(1);
     const [search, setSearch]: [string, Function] = useState(searchQuery);
-    const [sponsors, setSponsors]: [Sponsor[], Function] = useState([]);
+    const [items, setItems]: [T[], Function] = useState([]);
     const [error, setError]: [string | null, Function] = useState(null);
     const [isLoading, setIsLoading]: [boolean, Function] = useState(false);
     const [hasMore, setHasMore]: [boolean, Function] = useState(false);
 
     const debouncedSearch = useDebounce(search, 500);
 
-    const getSponsors = useCallback(
-        async (pageIndex): Promise<Sponsor[] | null> => {
+    const getItems = useCallback(
+        async (pageIndex): Promise<T[] | null> => {
             try {
                 setIsLoading(true);
-                const resp = await api.getSponsors(debouncedSearch, pageIndex);
-                const { items, pageSize, totalCount } = resp.data;
-                const lastPage = Math.ceil(totalCount / pageSize);
+                const resp = await apiCall(debouncedSearch, pageIndex);
+                const { items: newItems, pageSize, totalCount } = resp.data;
+                const lastPage = totalCount / pageSize;
                 setPageIndex(pageIndex);
                 setHasMore(lastPage > pageIndex);
-                return items;
+                return newItems;
             } catch (error) {
-                setError('Failed to fetch sponsors');
+                setError('Failed to fetch');
                 return null;
             } finally {
                 setIsLoading(false);
             }
         },
-        [debouncedSearch],
+        [debouncedSearch, apiCall],
     );
 
     useEffect(() => {
-        getSponsors(1).then((items) => {
-            setSponsors(items);
+        getItems(1).then((newItems) => {
+            setItems(newItems);
             history.replace(`/sponsors?search=${debouncedSearch}`);
         });
-    }, [debouncedSearch, setPageIndex, getSponsors, history]);
+    }, [debouncedSearch, getItems, history]);
 
     const loadMore = () => {
-        getSponsors(pageIndex + 1).then((items) => {
-            items && setSponsors([...sponsors, ...items]);
+        getItems(pageIndex + 1).then((newItems) => {
+            newItems && setItems([...items, ...newItems]);
         });
     };
 
     return {
-        sponsors,
+        items,
         error,
         search,
         setSearch,
