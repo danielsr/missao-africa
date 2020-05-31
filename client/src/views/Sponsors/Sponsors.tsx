@@ -1,14 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Title from '../../components/Title';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
+import { Button, Title, Input, GridEdit, InfiniteScroll } from '../../components';
 import { GridField } from '../../components/Grid';
-import GridEdit from '../../components/GridEdit';
-import useFetch from '../../hooks/useFetch';
+import { useFetch } from '../../hooks';
 import api from '../../services/api';
 import { Sponsor } from '../../types';
-import InfiniteScroll from '../../components/InfiniteScroll';
 
 function Sponsors() {
     const history = useHistory();
