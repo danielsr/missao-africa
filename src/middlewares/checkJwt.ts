@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers['token'] as string;
+    const token = req.headers['auth'] as string;
     const jwtSecret = process.env.JWT_SECRET;
     let jwtPayload;
 

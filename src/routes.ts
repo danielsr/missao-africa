@@ -1,4 +1,5 @@
 import PersonController from './controllers/PersonController';
+import AuthController from './controllers/AuthController';
 import { checkJwt } from './middlewares/checkJwt';
 
 export const Routes = [
@@ -31,5 +32,11 @@ export const Routes = [
         route: '/persons/:id',
         controller: PersonController.remove,
         middlewares: [checkJwt],
+    },
+    {
+        method: 'post',
+        route: '/login',
+        controller: AuthController.login,
+        middlewares: [],
     },
 ];
