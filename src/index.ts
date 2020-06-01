@@ -4,16 +4,16 @@ import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
-import * as cors from 'cors';
 import { Routes } from './routes';
 import { errorHandler, GenericError } from './middlewares/errorHandler';
+import cors from './middlewares/cors';
 
 createConnection()
     .then(async (connection) => {
         const app = express();
         app.use(bodyParser.json());
-        app.use(cors());
         app.use(helmet());
+        app.use(cors);
 
         Routes.forEach((route) => {
             (app as any)[route.method](

@@ -1,6 +1,6 @@
 ## Backend
 
-[-] Token Auth
+[x] Token Auth
 [ ] Serve built client files with Express
 [ ] Use my own cors handler
 [ ] Create the Role definition (Sponsor, Voluntier)
@@ -11,6 +11,10 @@
 [x] Pagination
 [x] Testing library
 [-] Axios config including token auth
+[-] Login page
+[ ] Refresh token
+[ ] Organize styles
+[ ] Fix update state after unmount issue
 [ ] Avoid duplicates
 [ ] Validate CPF
 [ ] Import all fields
