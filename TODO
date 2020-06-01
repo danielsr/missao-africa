@@ -1,6 +1,6 @@
 ## Backend
 
-[ ] Token Auth
+[-] Token Auth
 [ ] Serve built client files with Express
 [ ] Use my own cors handler
 [ ] Create the Role definition (Sponsor, Voluntier)
@@ -9,18 +9,18 @@
 
 [x] Persist query parameters
 [x] Pagination
-[ ] Testing library
+[x] Testing library
+[-] Axios config including token auth
 [ ] Avoid duplicates
 [ ] Validate CPF
 [ ] Import all fields
 [ ] Tailwind bundle size
 [ ] Delete sponsor
 [ ] Import feedback
-[ ] Axios config including token auth
 
 ## DevOps
 
-[ ] Deploy to heroku or Netlify
+[ ] Deploy to heroku
 
 ## General
 
