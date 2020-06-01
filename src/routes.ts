@@ -1,35 +1,35 @@
-import personController from './controllers/personController';
+import PersonController from './controllers/PersonController';
 import { checkJwt } from './middlewares/checkJwt';
 
 export const Routes = [
     {
         method: 'get',
         route: '/persons',
-        controller: personController.all,
+        controller: PersonController.all,
         middlewares: [checkJwt],
     },
     {
         method: 'get',
         route: '/persons/:id',
-        controller: personController.one,
+        controller: PersonController.one,
         middlewares: [checkJwt],
     },
     {
         method: 'post',
         route: '/persons',
-        controller: personController.save,
+        controller: PersonController.save,
         middlewares: [checkJwt],
     },
     {
         method: 'post',
         route: '/persons-import',
-        controller: personController.import,
+        controller: PersonController.import,
         middlewares: [checkJwt],
     },
     {
         method: 'delete',
         route: '/persons/:id',
-        controller: personController.remove,
+        controller: PersonController.remove,
         middlewares: [checkJwt],
     },
 ];
