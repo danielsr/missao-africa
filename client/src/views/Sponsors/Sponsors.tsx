@@ -8,7 +8,7 @@ import { Sponsor } from '../../types';
 
 function Sponsors() {
   const history = useHistory();
-  const { items: sponsors, setSearch, search, loadMore, hasMore, isLoading } = useFetch<Sponsor>(
+  const { items, setSearch, search, loadMore, hasMore, isLoading } = useFetch<Sponsor>(
     api.getSponsors
   );
   const fields: GridField[] = [
@@ -33,7 +33,7 @@ function Sponsors() {
           <Button label="Import Sponsors" onClick={() => history.push('/sponsors-import')} />
         </div>
       </div>
-      <GridEdit data={sponsors} fields={fields} editRoute="/sponsors-edit" />
+      {items.length > 0 && <GridEdit data={items} fields={fields} editRoute="/sponsors-edit" />}
       <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={loadMore} />
     </div>
   );

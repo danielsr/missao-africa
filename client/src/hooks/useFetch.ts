@@ -39,14 +39,18 @@ export default function useFetch<T>(apiCall: Function) {
 
   useEffect(() => {
     getItems(1).then((newItems) => {
-      setItems(newItems);
-      history.replace(`?search=${debouncedSearch}`);
+      if (newItems) {
+        setItems(newItems);
+        history.replace(`?search=${debouncedSearch}`);
+      }
     });
   }, [debouncedSearch, getItems, history]);
 
   const loadMore = () => {
     getItems(pageIndex + 1).then((newItems) => {
-      newItems && setItems([...items, ...newItems]);
+      if (newItems) {
+        newItems && setItems([...items, ...newItems]);
+      }
     });
   };
 
