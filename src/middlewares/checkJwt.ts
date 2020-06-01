@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers['auth'] as string;
+    const token = req.headers['authorization'] as string;
     const jwtSecret = process.env.JWT_SECRET;
     let jwtPayload;
 
@@ -18,7 +18,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     const newToken = jwt.sign({ userId, username }, jwtSecret, {
         expiresIn: '1h',
     });
-    res.setHeader('token', newToken);
+    res.setHeader('Token', newToken);
 
     next();
 };

@@ -17,4 +17,7 @@ export default {
   getSponsor(id: number) {
     return axios.get(`/persons/${id}`);
   },
+  login(payload) {
+    return axios.post(`/login`, payload);
+  },
 };
