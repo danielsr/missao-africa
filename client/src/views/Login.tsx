@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { useForm } from '../hooks';
 import { Input, Button } from '../components';
 import api from '../services/api';
+import { setToken, redirectToReturnUrl } from '../services/auth';
 
 function Login() {
   const { values, bindInput } = useForm({ email: '', password: '' });
   const [error, setError] = useState(false);
+
   const login = async () => {
     try {
       const resp = await api.login(values);
-      sessionStorage.setItem('token', resp.data);
+      setToken(resp.data);
+      redirectToReturnUrl();
     } catch (error) {
       setError(true);
     }
