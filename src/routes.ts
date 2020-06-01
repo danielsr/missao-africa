@@ -1,4 +1,4 @@
-import personController from './controller/personController';
+import personController from './controllers/personController';
 import { checkJwt } from './middlewares/checkJwt';
 
 export const Routes = [
