@@ -1,31 +1,42 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import Button from '.';
 
+const fn = jest.fn();
+const label = 'click';
+
+afterEach(cleanup);
+
+test('match snapshot', () => {
+  const { asFragment } = render(<Button label={label} onClick={fn} />);
+  expect(asFragment()).toMatchSnapshot();
+});
+
 test('render label', () => {
-  const { getByText } = render(<Button label="click" onClick={() => null} />);
-  const element = getByText('click');
-  expect(element).toBeInTheDocument();
+  const { getByText } = render(<Button label={label} onClick={fn} />);
+  const button = getByText(label);
+  expect(button).toBeInTheDocument();
 });
 
 test('call onClick function on click', () => {
-  const fn = jest.fn();
-  const { getByText } = render(<Button label="click" onClick={fn} />);
-  const element = getByText('click');
-  fireEvent.click(element);
+  const { getByText } = render(<Button label={label} onClick={fn} />);
+  const button = getByText(label);
+  fireEvent.click(button);
   expect(fn).toBeCalled();
 });
 
 test('render disabled class', () => {
-  const { getByText } = render(<Button label="click" onClick={() => null} disabled={true} />);
-  const element = getByText('click');
-  expect(element).toHaveClass('opacity-75 cursor-not-allowed');
+  const { getByText } = render(<Button label={label} onClick={fn} disabled={true} />);
+  const button = getByText(label);
+  expect(button).toHaveClass('opacity-75 cursor-not-allowed');
 });
 
 test('do not call onClick function when disabled', () => {
-  const fn = jest.fn();
-  const { getByText } = render(<Button label="click" onClick={fn} disabled={true} />);
-  const element = getByText('click');
-  fireEvent.click(element);
-  expect(fn).toBeCalledTimes(0);
+  const functionToNotBeCalled = jest.fn();
+  const { getByText } = render(
+    <Button label={label} onClick={functionToNotBeCalled} disabled={true} />
+  );
+  const button = getByText(label);
+  fireEvent.click(button);
+  expect(functionToNotBeCalled).toBeCalledTimes(0);
 });
