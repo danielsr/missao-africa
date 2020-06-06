@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { redirectToLoginPage, getToken } from './auth';
+import { redirectToLoginPage, getToken, setToken } from './auth';
 
 axios.defaults.baseURL = 'http://localhost:3001';
 
@@ -17,7 +17,10 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    // Todo: Refresh token
+    const newToken = response.headers.token;
+    if (newToken) {
+      setToken(newToken);
+    }
     return response;
   },
   function (error) {

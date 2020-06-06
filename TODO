@@ -1,26 +1,24 @@
 ## Backend
 
-[x] Token Auth
 [ ] Serve built client files with Express
-[ ] Use my own cors handler
 [ ] Create the Role definition (Sponsor, Voluntier)
 
 ## Frontend
 
-[x] Persist query parameters
-[x] Pagination
-[x] Testing library
-[-] Axios config including token auth
-[-] Login page
-[ ] Refresh token
+[ ] User info (context?)
+[ ] User name besides email
+[ ] Logout
 [ ] Organize styles
-[ ] Fix update state after unmount issue
 [ ] Avoid duplicates
 [ ] Validate CPF
 [ ] Import all fields
 [ ] Tailwind bundle size
 [ ] Delete sponsor
 [ ] Import feedback
+
+## Bugs
+
+[ ] Investigate possible loop useFetch when the api is down
 
 ## DevOps
 
