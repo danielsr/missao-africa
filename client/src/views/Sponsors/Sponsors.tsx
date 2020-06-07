@@ -5,8 +5,11 @@ import { GridField } from '../../components/Grid';
 import { useFetch } from '../../hooks';
 import api from '../../services/api';
 import { Sponsor } from '../../types';
+import { useStore } from '../../store';
+import { UserActionTypes } from '../../store/user';
 
 function Sponsors() {
+  const { dispatch } = useStore();
   const history = useHistory();
   const { items, setSearch, search, loadMore, hasMore, isLoading } = useFetch<Sponsor>(
     api.getSponsors
@@ -29,6 +32,10 @@ function Sponsors() {
           />
         </div>
         <div>
+          <Button
+            label="Set user"
+            onClick={() => dispatch({ type: UserActionTypes.Set, user: { name: 'Daniel...' } })}
+          />
           <Button label="New Sponsor" onClick={() => history.push('/sponsors-edit/0')} />
           <Button label="Import Sponsors" onClick={() => history.push('/sponsors-import')} />
         </div>
