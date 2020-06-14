@@ -5,6 +5,7 @@
 
 ## Frontend
 
+[ ] Split useFetch hook
 [ ] User info (context?)
 [ ] User name besides email
 [ ] Logout

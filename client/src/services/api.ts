@@ -12,7 +12,7 @@ export default {
     const query = new URLSearchParams();
     query.append('search', search);
     query.append('pageIndex', pageIndex);
-    return axios.get(`/persons?${query.toString()}`);
+    return `/persons?${query.toString()}`;
   },
   getSponsor(id: number) {
     return axios.get(`/persons/${id}`);
