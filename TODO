@@ -5,7 +5,8 @@
 
 ## Frontend
 
-[ ] Split useFetch hook
+[ ] Solve exhaustive-deps warnings
+[ ] Toaster
 [ ] User info (context?)
 [ ] User name besides email
 [ ] Logout

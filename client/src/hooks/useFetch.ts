@@ -1,27 +1,33 @@
-import { useState } from 'react';
-import axios from '../services/axiosConfig';
+import { useState, useCallback } from 'react';
+import { AxiosResponse } from 'axios';
 
-export default function useFetch() {
-  const [data, setData]: [any, Function] = useState([]);
+type FetchResponse = {
+  data: any;
+  error: string | null;
+  isLoading: boolean;
+};
+
+export default function useFetch(
+  req: (...args: any) => Promise<AxiosResponse>
+): [FetchResponse, (...args: any) => Promise<any>] {
+  const [data, setData]: [any, Function] = useState(null);
   const [error, setError]: [string | null, Function] = useState(null);
   const [isLoading, setIsLoading]: [boolean, Function] = useState(false);
 
-  const fetch = async (url: string): Promise<any> => {
-    try {
-      setIsLoading(true);
-      const resp = await axios.get(url);
-      setData(resp.data);
-    } catch (error) {
-      setError('Failed to fetch');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const fetch = useCallback(
+    async (...args: any): Promise<any> => {
+      try {
+        setIsLoading(true);
+        const resp = await req(...args);
+        setData(resp.data);
+      } catch (error) {
+        setError('Failed to fetch');
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [req]
+  );
 
-  return {
-    data,
-    fetch,
-    error,
-    isLoading,
-  };
+  return [{ data, error, isLoading }, fetch];
 }

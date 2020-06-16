@@ -14,17 +14,18 @@ function Sponsors() {
     { name: 'name', label: 'Name' },
     { name: 'email', label: 'Email' },
   ];
-  const { isLoading, data, fetch } = useFetch();
+  const [sponsors, fetchSponsors] = useFetch(api.getSponsors);
+  const { data, isLoading } = sponsors;
   const { setSearch, search, debouncedSearch } = useSearch();
   const { nextPage, setPageIndex, pageIndex, hasMore, items } = usePagination<Sponsor>(data);
 
   useEffect(() => {
     setPageIndex(1);
-  }, [debouncedSearch]);
+  }, [debouncedSearch, setPageIndex]);
 
   useEffect(() => {
-    fetch(api.getSponsors(debouncedSearch, pageIndex));
-  }, [debouncedSearch, pageIndex]);
+    fetchSponsors(debouncedSearch, pageIndex);
+  }, [debouncedSearch, pageIndex, fetchSponsors]);
 
   return (
     <div>

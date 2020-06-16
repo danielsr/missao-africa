@@ -6,10 +6,11 @@ export default function usePagination<T>(data: any) {
   const [hasMore, setHasMore]: [boolean, Function] = useState(false);
 
   useEffect(() => {
-    const { items: newItems, pageSize, totalCount } = data;
+    if (!data) return;
+    const { items: newItems, pageSize, totalCount, pageIndex } = data;
     const lastPage = totalCount / pageSize;
     setHasMore(lastPage > pageIndex);
-    setItems(pageIndex === 1 ? newItems : [...items, ...newItems]);
+    setItems((items) => (pageIndex === 1 ? newItems : [...items, ...newItems]));
   }, [data]);
 
   const nextPage = () => {

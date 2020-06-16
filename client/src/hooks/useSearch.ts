@@ -13,7 +13,6 @@ export default function useSearch() {
 
   useEffect(() => {
     history.replace(`?search=${debouncedSearch}`);
-    console.log('useSearch hook');
   }, [debouncedSearch, history]);
 
   return {
