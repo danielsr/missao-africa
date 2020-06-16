@@ -3,11 +3,12 @@
 [ ] Serve built client files with Express
 [ ] Create the Role definition (Sponsor, Voluntier)
 [ ] Sponsor status
+[ ] Tags
 
 ## Frontend
 
-[x] Solve exhaustive-deps warnings
-[x] Toaster
+[ ] Multi selection
+[ ] Form validation
 [ ] User info (context?)
 [ ] User name besides email
 [ ] Logout
