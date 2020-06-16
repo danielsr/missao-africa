@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useUser from '../store/useUser';
 
 function TopBar() {
-  const { user } = useUser();
   return (
     <div className="h-16 bg-blue-900 fixed top-0 left-0 right-0 flex justify-center">
       <div className="container flex justify-between items-center">
@@ -16,7 +14,7 @@ function TopBar() {
             Boletos
           </Link>
         </div>
-        <div className="text-white">{user?.name}</div>
+        <div className="text-white">Carol</div>
       </div>
     </div>
   );

@@ -2,11 +2,12 @@
 
 [ ] Serve built client files with Express
 [ ] Create the Role definition (Sponsor, Voluntier)
+[ ] Sponsor status
 
 ## Frontend
 
-[ ] Solve exhaustive-deps warnings
-[ ] Toaster
+[x] Solve exhaustive-deps warnings
+[x] Toaster
 [ ] User info (context?)
 [ ] User name besides email
 [ ] Logout

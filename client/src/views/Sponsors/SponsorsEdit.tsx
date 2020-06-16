@@ -3,16 +3,19 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Button, Title, Input } from '../../components';
 import useForm from '../../hooks/useForm';
 import api from '../../services/api';
+import useToaster from '../../store/useToaster';
 
 function SponsorsEdit() {
   const history = useHistory();
   const { id } = useParams();
   const { values, setValues, bindInput } = useForm({ name: '', email: '' });
+  const { showToaster } = useToaster();
 
   const save = async () => {
     try {
       await api.saveSponsors(values);
       history.push('/sponsors');
+      showToaster('Sponsor saved!');
     } catch (error) {
       console.log(error);
     }

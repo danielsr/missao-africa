@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react';
-import { userState, userActions } from './user';
+import { initialState as toaster, toasterActions } from './toaster';
 
-const initialState = { ...userState };
+const initialState = { toaster };
 
-const actions = { ...userActions };
+const actions = { ...toasterActions };
 
 const reducer = (state, action) => {
   return actions[action.type]?.(state, action) ?? state;
