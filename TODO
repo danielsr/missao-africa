@@ -1,9 +1,7 @@
 ## Backend
 
 [ ] Serve built client files with Express
-[ ] Create the Role definition (Sponsor, Voluntier)
-[ ] Sponsor status
-[ ] Tags
+[ ] Labels
 
 ## Frontend
 
@@ -15,7 +13,7 @@
 [ ] Organize styles
 [ ] Avoid duplicates
 [ ] Validate CPF
-[ ] Import all fields
+[x] Import all fields
 [ ] Tailwind bundle size
 [ ] Delete sponsor
 [ ] Import feedback

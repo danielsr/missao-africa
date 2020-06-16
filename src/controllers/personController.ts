@@ -30,6 +30,7 @@ export default class PersonController {
         const repo = getRepository(Person);
         const persons = req.body as Person[];
         persons.map(async (person) => {
+            person.labels = '{Sponsor,New}';
             await repo.save(person);
         });
         return { count: persons.length };
