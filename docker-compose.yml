@@ -12,6 +12,7 @@ services:
     image: node:11
     depends_on: 
       - db
+    restart: on-failure:3
     ports:
       - 3001:3001
     volumes:
