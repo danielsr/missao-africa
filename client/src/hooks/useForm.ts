@@ -8,7 +8,7 @@ export default function useForm(initialValues: object) {
     setValues,
     reset: (field: string) => setValues({ ...values, [field]: null }),
     bindInput: (field: string) => ({
-      value: values?.[field],
+      value: values?.[field] ?? '',
       onChange: (newValue: string) => {
         setValues({ ...values, [field]: newValue });
       },

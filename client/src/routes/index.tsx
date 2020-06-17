@@ -4,6 +4,8 @@ import Sponsors from '../views/Sponsors/Sponsors';
 import SponsorsImport from '../views/Sponsors/SponsorsImport';
 import SponsorsEdit from '../views/Sponsors/SponsorsEdit';
 import Login from '../views/Login';
+import Labels from '../views/Labels';
+import LabelsEdit from '../views/Labels/LabelsEdit';
 
 function Routes() {
   return (
@@ -20,7 +22,12 @@ function Routes() {
       <Route path="/sponsors-edit/:id">
         <SponsorsEdit />
       </Route>
-      <Route path="/boletos">...</Route>
+      <Route path="/labels">
+        <Labels />
+      </Route>
+      <Route path="/labels-edit/:id">
+        <LabelsEdit />
+      </Route>
     </Switch>
   );
 }

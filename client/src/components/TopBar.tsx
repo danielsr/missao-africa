@@ -10,8 +10,8 @@ function TopBar() {
           <Link to="/sponsors" className="mr-4 underline">
             Sponsors
           </Link>
-          <Link to="/boletos" className="mr-4 underline">
-            Boletos
+          <Link to="/labels" className="mr-4 underline">
+            Labels
           </Link>
         </div>
         <div className="text-white">Carol</div>

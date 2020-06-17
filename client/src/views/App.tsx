@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TopBar from '../components/TopBar';
 import Routes from '../routes';
 import Toaster from '../components/Toaster';
 import useToaster from '../store/useToaster';
+import useLabels from './Labels/useLabels';
 
 function App() {
   const { toaster } = useToaster();
+  const { loadLabels } = useLabels();
+
+  useEffect(() => {
+    loadLabels();
+  }, []);
+
   return (
     <div className="bg-gray-400 min-h-screen">
       <TopBar />

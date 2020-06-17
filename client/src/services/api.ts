@@ -1,5 +1,5 @@
 import axios from './axiosConfig';
-import { Sponsor } from '../types';
+import { Sponsor, Label } from '../types';
 
 export default {
   importSponsors(sponsors: Sponsor[]) {
@@ -19,5 +19,11 @@ export default {
   },
   login(payload) {
     return axios.post(`/login`, payload);
+  },
+  getLabels() {
+    return axios.get('/labels');
+  },
+  saveLabel(label: Label) {
+    return axios.post('/labels', label);
   },
 };

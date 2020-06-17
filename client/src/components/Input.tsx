@@ -18,12 +18,15 @@ export default function Input({
   type = 'text',
   ...inputProps
 }: InputProps) {
+  const inputClass =
+    type === 'color' ? '' : 'border border-gray-400 p-2 text-gray-800 rounded outline-none';
+
   return (
     <div className={`flex flex-col ${className}`}>
       {label && <div className="text-gray-800 mb-1">{label}</div>}
       <input
         type={type}
-        className="border border-gray-400 p-2 text-gray-800 rounded outline-none"
+        className={inputClass}
         placeholder={placeHolder}
         onChange={(e) => onChange?.(e.target.value)}
         value={value}

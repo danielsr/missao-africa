@@ -8,4 +8,10 @@ export default [
         controller: LabelController.all,
         middlewares: [checkJwt],
     },
+    {
+        method: 'post',
+        route: '/labels',
+        controller: LabelController.save,
+        middlewares: [checkJwt],
+    },
 ];

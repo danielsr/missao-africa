@@ -8,3 +8,10 @@ export type Sponsor = {
   notes: string;
   locale: string;
 };
+
+export type Label = {
+  id: number;
+  name: string;
+  color: string;
+  description?: string;
+};

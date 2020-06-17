@@ -7,4 +7,8 @@ export default class LabelController {
         const repo = getRepository(Label);
         return repo.find();
     }
+    static async save(req: Request, res: Response, next: NextFunction) {
+        const repo = getRepository(Label);
+        return repo.save(req.body);
+    }
 }
