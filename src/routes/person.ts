@@ -1,10 +1,7 @@
-import PersonController from './controllers/PersonController';
-import AuthController from './controllers/AuthController';
-import LabelController from './controllers/LabelController';
-import { checkJwt } from './middlewares/checkJwt';
-import SetupController from './controllers/SetupController';
+import PersonController from '../controllers/PersonController';
+import { checkJwt } from '../middlewares/checkJwt';
 
-export const Routes = [
+export default [
     {
         method: 'get',
         route: '/persons',
@@ -34,23 +31,5 @@ export const Routes = [
         route: '/persons/:id',
         controller: PersonController.remove,
         middlewares: [checkJwt],
-    },
-    {
-        method: 'post',
-        route: '/login',
-        controller: AuthController.login,
-        middlewares: [],
-    },
-    {
-        method: 'get',
-        route: '/labels',
-        controller: LabelController.all,
-        middlewares: [checkJwt],
-    },
-    {
-        method: 'post',
-        route: '/setup',
-        controller: SetupController.setup,
-        middlewares: [],
     },
 ];

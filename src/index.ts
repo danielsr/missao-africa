@@ -4,7 +4,7 @@ import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
-import { Routes } from './routes';
+import routes from './routes';
 import { errorHandler, GenericError } from './middlewares/errorHandler';
 import cors from './middlewares/cors';
 
@@ -15,7 +15,7 @@ createConnection()
         app.use(helmet());
         app.use(cors);
 
-        Routes.forEach((route) => {
+        routes.forEach((route) => {
             (app as any)[route.method](
                 route.route,
                 route.middlewares,
