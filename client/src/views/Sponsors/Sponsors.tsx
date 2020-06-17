@@ -7,12 +7,22 @@ import useSearch from '../../hooks/useSearch';
 import usePagination from '../../hooks/usePagination';
 import { Sponsor } from '../../types';
 import api from '../../services/api';
+import LabelGroup from '../../components/LabelGroup';
+import useLabels from '../Labels/useLabels';
 
 function Sponsors() {
+  const { labels } = useLabels();
   const history = useHistory();
   const fields: GridField[] = [
     { name: 'name', label: 'Name' },
     { name: 'email', label: 'Email' },
+    {
+      name: 'labels',
+      label: 'Labels',
+      renderFunction(row) {
+        return labels && <LabelGroup value={row.labels} labels={labels} />;
+      },
+    },
   ];
   const [sponsors, fetchSponsors] = useFetch(api.getSponsors);
   const { data, isLoading } = sponsors;

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { GridField } from '../../components/Grid';
 import { Title, GridEdit } from '../../components';
 import useLabels from './useLabels';
+import Label from '../../components/Label';
 
 function Labels() {
   const { labels, loadLabels } = useLabels();
@@ -10,11 +11,7 @@ function Labels() {
       name: 'name',
       label: 'Label',
       renderFunction(row) {
-        return (
-          <span className="rounded text-white p-1 text-xs" style={{ backgroundColor: row.color }}>
-            {row.name}
-          </span>
-        );
+        return <Label name={row.name} color={row.color} />;
       },
     },
     { name: 'description', label: 'Description' },
