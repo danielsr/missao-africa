@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 @Entity()
 export class Label {
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
     @Column()
     name: string;
@@ -16,9 +16,9 @@ export class Label {
 
     @Column()
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt?: Date;
 
     @Column()
     @UpdateDateColumn()
-    updatedAt: Date;
+    updatedAt?: Date;
 }

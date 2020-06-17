@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { getRepository } from 'typeorm';
 import { User } from '../entity/User';
 import { BadRequest } from '../middlewares/errorHandler';
+import { Label } from '../entity/Label';
 
 export default class SetupController {
     static setup = async (req: Request, res: Response, next: NextFunction) => {
-        const repo = getRepository(User);
-        const users = await repo.find();
+        const userRepo = getRepository(User);
+        const users = await userRepo.find();
         if (users.length > 0) {
             return next(BadRequest);
         }
@@ -15,7 +16,11 @@ export default class SetupController {
         user.email = 'danielsr@gmail.com';
         user.password = 'admin';
         user.hashPassword();
-        await repo.save(user);
+        await userRepo.save(user);
+
+        const labelRepo = getRepository(Label);
+        const defaultLabels: Label[] = [{ name: 'New' }, { name: 'Sponsors' }];
+        labelRepo.save(defaultLabels);
 
         return { setup: 'ok' };
     };
