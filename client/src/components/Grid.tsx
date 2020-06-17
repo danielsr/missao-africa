@@ -26,7 +26,7 @@ function renderHeader(fields: GridField[]) {
 
 function renderRows(fields: GridField[], data: any[]) {
   return data.map((row, index) => (
-    <tr key={`Grid_Row_${index}`} className="odd:bg-gray-200 hover:bg-gray-300">
+    <tr key={`Grid_Row_${index}`} className="border-b border-gray-600 hover:bg-gray-400">
       {fields.map((field) => (
         <td key={`Grid_Row_${index}_${field.name}`} className="text-left p-1">
           {field.renderFunction ? field.renderFunction(row) : row[field.name]}

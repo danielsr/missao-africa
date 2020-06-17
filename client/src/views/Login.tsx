@@ -19,8 +19,8 @@ function Login() {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 bg-white flex items-center justify-center">
-      <div className="shadow-lg rounded w-1/4">
+    <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-500 flex items-center justify-center">
+      <div className="shadow-lg rounded w-1/4 bg-gray-200">
         <div className="bg-blue-900 text-white p-3 rounded-t">Login</div>
         <div className="p-3">
           <Input label="E-mail" className="mb-2" {...bindInput('email')} />
