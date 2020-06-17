@@ -1,6 +1,8 @@
 import PersonController from './controllers/PersonController';
 import AuthController from './controllers/AuthController';
+import LabelController from './controllers/LabelController';
 import { checkJwt } from './middlewares/checkJwt';
+import SetupController from './controllers/SetupController';
 
 export const Routes = [
     {
@@ -37,6 +39,18 @@ export const Routes = [
         method: 'post',
         route: '/login',
         controller: AuthController.login,
+        middlewares: [],
+    },
+    {
+        method: 'get',
+        route: '/labels',
+        controller: LabelController.all,
+        middlewares: [checkJwt],
+    },
+    {
+        method: 'post',
+        route: '/setup',
+        controller: SetupController.setup,
         middlewares: [],
     },
 ];
