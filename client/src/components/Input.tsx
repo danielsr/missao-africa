@@ -1,12 +1,21 @@
 import React from 'react';
+import { toDatetimeLocal } from '../util/date';
 
-type InputProps = {
+export enum InputType {
+  text = 'text',
+  color = 'color',
+  datetimeLocal = 'datetime-local',
+  password = 'password',
+}
+
+type PropTypes = {
   label?: string;
   placeHolder?: string;
   onChange?: Function;
   className?: string;
   value?: string;
-  type?: string;
+  type?: InputType;
+  disabled?: boolean;
 };
 
 export default function Input({
@@ -15,11 +24,13 @@ export default function Input({
   onChange,
   className,
   value,
-  type = 'text',
+  type = InputType.text,
+  disabled = false,
   ...inputProps
-}: InputProps) {
+}: PropTypes) {
   const inputClass =
-    type === 'color' ? '' : 'border border-gray-400 p-2 text-gray-800 rounded outline-none';
+    type === InputType.color ? '' : 'border border-gray-400 p-2 text-gray-800 rounded outline-none';
+  const formatedValue = type === InputType.datetimeLocal && value ? toDatetimeLocal(value) : value;
 
   return (
     <div className={`flex flex-col ${className}`}>
@@ -29,7 +40,8 @@ export default function Input({
         className={inputClass}
         placeholder={placeHolder}
         onChange={(e) => onChange?.(e.target.value)}
-        value={value}
+        value={formatedValue}
+        disabled={disabled}
         {...inputProps}
       />
     </div>

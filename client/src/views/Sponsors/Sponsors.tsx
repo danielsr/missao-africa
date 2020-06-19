@@ -16,6 +16,7 @@ function Sponsors() {
   const fields: GridField[] = [
     { name: 'name', label: 'Name' },
     { name: 'email', label: 'Email' },
+    { name: 'cpf', label: 'CPF' },
     {
       name: 'labels',
       label: 'Labels',

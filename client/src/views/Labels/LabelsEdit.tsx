@@ -5,6 +5,7 @@ import useForm from '../../hooks/useForm';
 import api from '../../services/api';
 import useToaster from '../../store/useToaster';
 import useLabels from './useLabels';
+import { InputType } from '../../components/Input';
 
 function LabelsEdit() {
   const history = useHistory();
@@ -43,7 +44,7 @@ function LabelsEdit() {
       <div className="w-1/2">
         <Input label="Name" className="mb-2" {...bindInput('name')} />
         <Input label="Description" className="mb-2" {...bindInput('description')} />
-        <Input label="Color" type="color" {...bindInput('color')} />
+        <Input label="Color" type={InputType.color} {...bindInput('color')} />
       </div>
     </div>
   );

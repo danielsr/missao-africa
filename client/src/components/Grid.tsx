@@ -38,7 +38,7 @@ function renderRows(fields: GridField[], data: any[]) {
 
 function Grid({ fields, data }: GridProps) {
   return (
-    <table className="table-auto text-sm">
+    <table className="table-auto text-sm w-full">
       <thead>{renderHeader(fields)}</thead>
       <tbody>{renderRows(fields, data)}</tbody>
     </table>

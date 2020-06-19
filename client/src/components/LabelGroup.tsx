@@ -12,7 +12,7 @@ function LabelGroup({ labels, value }: props) {
     <div>
       {value?.map((labelName) => {
         const label = labels.find((label) => label.name === labelName);
-        return <LabelComponent name={labelName} color={label?.color} />;
+        return <LabelComponent name={labelName} color={label?.color} key={labelName} />;
       })}
     </div>
   );

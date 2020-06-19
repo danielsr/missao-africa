@@ -3,6 +3,7 @@ import { useForm } from '../hooks';
 import { Input, Button } from '../components';
 import api from '../services/api';
 import { setToken, redirectToReturnUrl } from '../services/auth';
+import { InputType } from '../components/Input';
 
 function Login() {
   const { values, bindInput } = useForm({ email: '', password: '' });
@@ -24,7 +25,12 @@ function Login() {
         <div className="bg-blue-900 text-white p-3 rounded-t">Login</div>
         <div className="p-3">
           <Input label="E-mail" className="mb-2" {...bindInput('email')} />
-          <Input label="Password" type="password" className="mb-2" {...bindInput('password')} />
+          <Input
+            label="Password"
+            type={InputType.password}
+            className="mb-2"
+            {...bindInput('password')}
+          />
           <Button label="Login" onClick={login} />
           {error && <div>Invalid user</div>}
         </div>
