@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useImportPeople } from './hooks';
 import Grid, { GridField } from 'components/Grid';
-import { Button, InputFile, Page } from 'components';
+import { Button, InputFile, Page, Block } from 'components';
 import api from 'services/api';
 
 function PeopleImport() {
@@ -26,9 +26,11 @@ function PeopleImport() {
           <Button label="Cancel" onClick={() => history.push('/people')} />
         </div>
       </div>
-      <InputFile onChange={importPeople} />
-      {error && <span>{error}</span>}
-      {people.length > 0 && !error && <Grid fields={fields} data={people} />}
+      <Block>
+        <InputFile onChange={importPeople} />
+        {error && <span>{error}</span>}
+        {people.length > 0 && !error && <Grid fields={fields} data={people} />}
+      </Block>
     </Page>
   );
 }
