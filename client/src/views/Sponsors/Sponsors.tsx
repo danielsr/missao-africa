@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Title, Input, GridEdit, InfiniteScroll } from '../../components';
+import { Button, Page, Input, GridEdit, InfiniteScroll } from '../../components';
 import { GridField } from '../../components/Grid';
 import useFetch from '../../hooks/useFetch';
 import useSearch from '../../hooks/useSearch';
@@ -39,8 +39,7 @@ function Sponsors() {
   }, [debouncedSearch, pageIndex, fetchSponsors]);
 
   return (
-    <div>
-      <Title title="Sponsors" />
+    <Page title="People">
       <div className="flex justify-between py-4">
         <div className="flex-1">
           <Input
@@ -56,7 +55,7 @@ function Sponsors() {
       </div>
       {items && <GridEdit data={items} fields={fields} editRoute="/sponsors-edit" />}
       <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={nextPage} />
-    </div>
+    </Page>
   );
 }
 

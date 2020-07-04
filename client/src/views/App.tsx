@@ -18,9 +18,7 @@ function App() {
     <div className="flex min-h-screen">
       <TopBar />
       <SideMenu />
-      <div className="mt-20 ml-64 w-full bg-gray-200 p-12">
-        <Routes />
-      </div>
+      <Routes />
       {toaster.show && <Toaster text={toaster.text} />}
     </div>
   );
