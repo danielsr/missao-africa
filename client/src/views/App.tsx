@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import TopBar from '../components/TopBar';
+import TopBar from 'components/TopBar';
+import SideMenu from 'components/SideMenu';
 import Routes from '../routes';
 import Toaster from '../components/Toaster';
 import useToaster from '../store/useToaster';
@@ -14,16 +15,13 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-gray-400 min-h-screen">
+    <div className="flex min-h-screen">
       <TopBar />
-      {toaster.show && <Toaster text={toaster.text} />}
-      <div className="flex justify-center">
-        <div className="mt-24 mb-8 container">
-          <div className="bg-gray-200 shadow-md rounded p-4">
-            <Routes />
-          </div>
-        </div>
+      <SideMenu />
+      <div className="mt-20 ml-64 w-full bg-gray-200 p-12">
+        <Routes />
       </div>
+      {toaster.show && <Toaster text={toaster.text} />}
     </div>
   );
 }
