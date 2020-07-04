@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
-import './style/tailwind.css';
-import App from './views/App';
+import 'assets/css/tailwind.css';
+import App from 'views/App';
 import * as serviceWorker from './serviceWorker';
-import history from './routes/history';
-import { StoreProvider } from './store';
+import history from 'routes/history';
+import { StoreProvider } from 'store';
 
 ReactDOM.render(
   <React.StrictMode>

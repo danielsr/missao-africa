@@ -39,7 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:styles": "postcss src/style/tailwind.src.css -o src/style/tailwind.css",
+    "build:styles": "postcss src/assets/css/tailwind.src.css -o src/assets/css/tailwind.css",
     "prebuild": "yarn build:styles",
     "prestart": "yarn build:styles"
   },
