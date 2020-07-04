@@ -7,6 +7,7 @@ import useToaster from 'store/useToaster';
 import { InputType } from 'components/Input';
 import LabelGroup from 'components/LabelGroup';
 import { useLabels } from 'modules/Labels/hooks';
+import { ButtonType } from 'components/Button';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -37,13 +38,6 @@ function PeopleEdit() {
 
   return (
     <Page title="People">
-      <div className="flex justify-between py-4">
-        <div></div>
-        <div>
-          <Button label="Save" onClick={save} />
-          <Button label="Cancel" onClick={() => history.push('/people')} />
-        </div>
-      </div>
       <Block>
         <LabelGroup labels={labels} value={values.labels} />
         <Input label="Name" className="mb-2 mt-4" {...bindInput('name')} />
@@ -58,6 +52,12 @@ function PeopleEdit() {
           className="mb-2"
           disabled
           {...bindInput('submitedAt')}
+        />
+        <Button label="Save" onClick={save} className="mr-2 mt-8" />
+        <Button
+          label="Cancel"
+          type={ButtonType.secondary}
+          onClick={() => history.push('/people')}
         />
       </Block>
     </Page>
