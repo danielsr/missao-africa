@@ -8,12 +8,9 @@ type ButtonProps = {
 };
 
 function Button({ label, onClick, disabled }: ButtonProps) {
-  const className = classNames(
-    'p-2 bg-blue-900 hover:bg-blue-800 text-white rounded mr-2 text-sm',
-    {
-      'opacity-75 cursor-not-allowed': disabled,
-    }
-  );
+  const className = classNames('p-2 bg-blue-700 hover:bg-blue-600 text-white rounded text-sm', {
+    'opacity-75 cursor-not-allowed': disabled,
+  });
 
   return (
     <button className={className} onClick={() => onClick()} disabled={disabled}>
