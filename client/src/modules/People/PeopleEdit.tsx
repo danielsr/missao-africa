@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Page, Input } from 'components';
+import { Button, Page, Input, Block } from 'components';
 import useForm from 'hooks/useForm';
 import api from 'services/api';
 import useToaster from 'store/useToaster';
@@ -44,7 +44,7 @@ function PeopleEdit() {
           <Button label="Cancel" onClick={() => history.push('/people')} />
         </div>
       </div>
-      <div className="w-1/2">
+      <Block>
         <LabelGroup labels={labels} value={values.labels} />
         <Input label="Name" className="mb-2 mt-4" {...bindInput('name')} />
         <Input label="Email" className="mb-2" {...bindInput('email')} />
@@ -59,7 +59,7 @@ function PeopleEdit() {
           disabled
           {...bindInput('submitedAt')}
         />
-      </div>
+      </Block>
     </Page>
   );
 }

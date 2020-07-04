@@ -4,6 +4,6 @@ export { default as GridEdit } from './GridEdit';
 export { default as InfiniteScroll } from './InfiniteScroll';
 export { default as Input } from './Input';
 export { default as InputFile } from './InputFile';
-export { default as Title } from './Title';
 export { default as Page } from './Page';
 export { default as TopBar } from './TopBar';
+export { default as Block } from './Block';

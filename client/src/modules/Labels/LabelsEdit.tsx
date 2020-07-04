@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Page, Input } from 'components';
+import { Button, Page, Input, Block } from 'components';
 import useForm from 'hooks/useForm';
 import api from 'services/api';
 import useToaster from 'store/useToaster';
@@ -40,11 +40,11 @@ function LabelsEdit() {
           <Button label="Cancel" onClick={() => history.push('/labels')} />
         </div>
       </div>
-      <div className="w-1/2">
+      <Block>
         <Input label="Name" className="mb-2" {...bindInput('name')} />
         <Input label="Description" className="mb-2" {...bindInput('description')} />
         <Input label="Color" type={InputType.color} {...bindInput('color')} />
-      </div>
+      </Block>
     </Page>
   );
 }
