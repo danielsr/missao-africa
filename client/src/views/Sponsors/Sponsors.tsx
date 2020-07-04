@@ -52,7 +52,6 @@ function Sponsors() {
         </div>
         <div>
           <Button label="New Sponsor" onClick={() => history.push('/sponsors-edit/0')} />
-          <Button label="Import Sponsors" onClick={() => history.push('/sponsors-import')} />
         </div>
       </div>
       {items && <GridEdit data={items} fields={fields} editRoute="/sponsors-edit" />}

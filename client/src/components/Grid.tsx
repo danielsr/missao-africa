@@ -44,7 +44,7 @@ function renderRows(fields: GridField[], data: any[]) {
 
 function Grid({ fields, data }: GridProps) {
   return (
-    <div className="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+    <div className="align-middle inline-block min-w-full shadow overflow-hidden rounded border-b border-gray-200 text-gray-900 text-sm">
       <table className="min-w-full">
         <thead>{renderHeader(fields)}</thead>
         <tbody className="bg-white">{renderRows(fields, data)}</tbody>

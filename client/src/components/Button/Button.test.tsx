@@ -7,11 +7,6 @@ const label = 'click';
 
 afterEach(cleanup);
 
-test('match snapshot', () => {
-  const { asFragment } = render(<Button label={label} onClick={fn} />);
-  expect(asFragment()).toMatchSnapshot();
-});
-
 test('render label', () => {
   const { getByText } = render(<Button label={label} onClick={fn} />);
   const button = getByText(label);

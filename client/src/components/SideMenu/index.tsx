@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import 'css.gg/icons/css/user-list.css';
+import 'css.gg/icons/css/user-add.css';
 import 'css.gg/icons/css/tag.css';
 
 function SideMenu() {
   const { pathname } = useLocation();
   const menuItems = [
     { label: 'People', to: '/sponsors', icon: 'gg-user-list' },
+    { label: 'Import People', to: '/sponsors-import', icon: 'gg-user-add' },
     { label: 'Labels', to: '/labels', icon: 'gg-tag' },
   ].map((menuItem) => ({ ...menuItem, active: menuItem.to === pathname }));
   const baseClass = 'flex items-center mt-4 py-2 px-6 block border-l-4';
