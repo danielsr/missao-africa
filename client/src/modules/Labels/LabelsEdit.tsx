@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Title, Input } from '../../components';
-import useForm from '../../hooks/useForm';
-import api from '../../services/api';
-import useToaster from '../../store/useToaster';
-import useLabels from './useLabels';
-import { InputType } from '../../components/Input';
+import { Button, Page, Input } from 'components';
+import useForm from 'hooks/useForm';
+import api from 'services/api';
+import useToaster from 'store/useToaster';
+import { useLabels } from './hooks';
+import { InputType } from 'components/Input';
 
 function LabelsEdit() {
   const history = useHistory();
@@ -32,8 +32,7 @@ function LabelsEdit() {
   }, [labels]);
 
   return (
-    <div>
-      <Title title="Labels Form" />
+    <Page title="Labels Form">
       <div className="flex justify-between py-4">
         <div></div>
         <div>
@@ -46,7 +45,7 @@ function LabelsEdit() {
         <Input label="Description" className="mb-2" {...bindInput('description')} />
         <Input label="Color" type={InputType.color} {...bindInput('color')} />
       </div>
-    </div>
+    </Page>
   );
 }
 

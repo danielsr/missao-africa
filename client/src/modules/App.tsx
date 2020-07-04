@@ -4,7 +4,7 @@ import SideMenu from 'components/SideMenu';
 import Routes from '../routes';
 import Toaster from '../components/Toaster';
 import useToaster from '../store/useToaster';
-import useLabels from './Labels/useLabels';
+import { useLabels } from './Labels/hooks';
 
 function App() {
   const { toaster } = useToaster();

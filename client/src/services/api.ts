@@ -1,20 +1,20 @@
 import axios from './axiosConfig';
-import { Sponsor, Label } from '../types';
+import { Person, Label } from '../types';
 
 export default {
-  importSponsors(sponsors: Sponsor[]) {
-    return axios.post('/persons-import', sponsors);
+  importPeople(people: Person[]) {
+    return axios.post('/persons-import', people);
   },
-  saveSponsors(sponsor: Sponsor) {
-    return axios.post('/persons', sponsor);
+  savePerson(person: Person) {
+    return axios.post('/persons', person);
   },
-  getSponsors(search: string, pageIndex) {
+  getPeople(search: string, pageIndex) {
     const query = new URLSearchParams();
     query.append('search', search);
     query.append('pageIndex', pageIndex);
     return axios.get(`/persons?${query.toString()}`);
   },
-  getSponsor(id: number) {
+  getPerson(id: number) {
     return axios.get(`/persons/${id}`);
   },
   login(payload) {

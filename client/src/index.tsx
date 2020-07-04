@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import 'assets/css/tailwind.css';
-import App from 'views/App';
+import App from 'modules/App';
 import * as serviceWorker from './serviceWorker';
 import history from 'routes/history';
 import { StoreProvider } from 'store';

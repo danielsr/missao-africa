@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { GridField } from '../../components/Grid';
-import { Title, GridEdit } from '../../components';
-import useLabels from './useLabels';
-import Label from '../../components/Label';
+import { GridField } from 'components/Grid';
+import { Page, GridEdit } from 'components';
+import { useLabels } from './hooks';
+import Label from 'components/Label';
 
 function Labels() {
   const { labels, loadLabels } = useLabels();
@@ -22,12 +22,11 @@ function Labels() {
   }, []);
 
   return (
-    <div>
-      <Title title="Labels" />
+    <Page title="Labels">
       {labels && labels.length > 0 && (
         <GridEdit data={labels} fields={fields} editRoute="/labels-edit" />
       )}
-    </div>
+    </Page>
   );
 }
 

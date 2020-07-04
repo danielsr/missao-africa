@@ -1,9 +1,9 @@
 import { useStore } from '../../store';
 import { LabelsActionTypes } from '../../store/labels';
-import api from '../../services/api';
-import { Label } from '../../types';
+import api from 'services/api';
+import { Label } from 'types';
 
-export default function useLabels(): { labels: Label[]; loadLabels: Function } {
+export function useLabels(): { labels: Label[]; loadLabels: Function } {
   const { state, dispatch } = useStore();
 
   const loadLabels = async () => {

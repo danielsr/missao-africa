@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Title, Input } from '../../components';
-import useForm from '../../hooks/useForm';
-import api from '../../services/api';
-import useToaster from '../../store/useToaster';
-import { InputType } from '../../components/Input';
-import LabelGroup from '../../components/LabelGroup';
-import useLabels from '../Labels/useLabels';
+import { Button, Page, Input } from 'components';
+import useForm from 'hooks/useForm';
+import api from 'services/api';
+import useToaster from 'store/useToaster';
+import { InputType } from 'components/Input';
+import LabelGroup from 'components/LabelGroup';
+import { useLabels } from 'modules/Labels/hooks';
 
-function SponsorsEdit() {
+function PeopleEdit() {
   const history = useHistory();
   const { id } = useParams();
   const { values, setValues, bindInput } = useForm({});
@@ -17,32 +17,31 @@ function SponsorsEdit() {
 
   const save = async () => {
     try {
-      await api.saveSponsors(values);
-      history.push('/sponsors');
-      showToaster('Sponsor saved!');
+      await api.savePerson(values);
+      history.push('/people');
+      showToaster('People saved!');
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    const fetchSponsor = async () => {
+    const fetchPerson = async () => {
       if (id > 0) {
-        const resp = await api.getSponsor(id);
+        const resp = await api.getPerson(id);
         setValues(resp.data);
       }
     };
-    fetchSponsor();
+    fetchPerson();
   }, [id, setValues]);
 
   return (
-    <div>
-      <Title title="Sponsors Form" />
+    <Page title="People">
       <div className="flex justify-between py-4">
         <div></div>
         <div>
           <Button label="Save" onClick={save} />
-          <Button label="Cancel" onClick={() => history.push('/sponsors')} />
+          <Button label="Cancel" onClick={() => history.push('/people')} />
         </div>
       </div>
       <div className="w-1/2">
@@ -61,8 +60,8 @@ function SponsorsEdit() {
           {...bindInput('submitedAt')}
         />
       </div>
-    </div>
+    </Page>
   );
 }
 
-export default SponsorsEdit;
+export default PeopleEdit;

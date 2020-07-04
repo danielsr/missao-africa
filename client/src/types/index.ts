@@ -1,4 +1,4 @@
-export type Sponsor = {
+export type Person = {
   submitedAt?: Date | null;
   name: string;
   cpf: string;

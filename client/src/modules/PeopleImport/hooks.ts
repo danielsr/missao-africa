@@ -1,9 +1,9 @@
 import { useState, ChangeEvent } from 'react';
 import Papa from 'papaparse';
-import { Sponsor } from '../../types';
+import { Person } from '../../types';
 
-function mapSponsors(sponsorsArray: string[][]): Sponsor[] {
-  return sponsorsArray.slice(1).map((row) => ({
+function mapPeople(peopleArray: string[][]): Person[] {
+  return peopleArray.slice(1).map((row) => ({
     submitedAt: new Date(row[0]),
     name: row[1],
     cpf: row[2],
@@ -15,36 +15,36 @@ function mapSponsors(sponsorsArray: string[][]): Sponsor[] {
   }));
 }
 
-export function useImportSponsors() {
-  const [sponsors, setSponsors]: [Sponsor[], Function] = useState([]);
+export function useImportPeople() {
+  const [people, setPeople]: [Person[], Function] = useState([]);
   const [error, setError]: [string | null, Function] = useState(null);
 
-  const importSponsors = (event: ChangeEvent<HTMLInputElement>): void => {
+  const importPeople = (event: ChangeEvent<HTMLInputElement>): void => {
     if (!event.target.files?.[0]) {
       setError('No file');
-      setSponsors([]);
+      setPeople([]);
       return;
     }
     Papa.parse(event.target.files?.[0], {
       complete: function (results) {
         if (results.errors.length > 0) {
           setError('Error trying to parse the file');
-          setSponsors([]);
+          setPeople([]);
         } else {
           setError(null);
-          setSponsors(mapSponsors(results.data));
+          setPeople(mapPeople(results.data));
         }
       },
       error: function (error) {
         setError(error.message);
-        setSponsors([]);
+        setPeople([]);
       },
     });
   };
 
   return {
-    sponsors,
-    importSponsors,
+    people,
+    importPeople,
     error,
   };
 }
