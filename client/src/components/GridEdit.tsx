@@ -14,7 +14,7 @@ export default function GridEdit({ data, fields, editRoute }: GridEditProps) {
       label: 'Edit',
       renderFunction(row) {
         return (
-          <Link className="underline text-blue-700" to={`${editRoute}/${row.id}`}>
+          <Link className="text-indigo-600 hover:text-indigo-900" to={`${editRoute}/${row.id}`}>
             Edit
           </Link>
         );
