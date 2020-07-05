@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Button, Page, Input, GridEdit, InfiniteScroll } from 'components';
+import { Page, Input, GridEdit, InfiniteScroll } from 'components';
 import { GridField } from 'components/Grid';
 import LabelGroup from 'components/LabelGroup';
 import useFetch from 'hooks/useFetch';
@@ -12,7 +11,6 @@ import { useLabels } from 'modules/Labels/hooks';
 
 function People() {
   const { labels } = useLabels();
-  const history = useHistory();
   const fields: GridField[] = [
     { name: 'name', label: 'Name' },
     { name: 'email', label: 'Email' },
@@ -39,20 +37,13 @@ function People() {
   }, [debouncedSearch, pageIndex, fetchPeople]);
 
   return (
-    <Page title="People">
-      <div className="flex justify-between py-4">
-        <div className="flex-1">
-          <Input
-            placeHolder="Search people..."
-            className="w-1/2"
-            value={search}
-            onChange={setSearch}
-          />
-        </div>
-        <div>
-          <Button icon="add" label="New Person" onClick={() => history.push('/people-edit/0')} />
-        </div>
-      </div>
+    <Page title="People" newLabel="New Person" newRoute="/people-edit/0">
+      <Input
+        placeHolder="Search people..."
+        className="w-1/2 mb-4"
+        value={search}
+        onChange={setSearch}
+      />
       {items && <GridEdit data={items} fields={fields} editRoute="/people-edit" />}
       <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={nextPage} />
     </Page>

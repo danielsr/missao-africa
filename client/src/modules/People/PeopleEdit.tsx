@@ -7,7 +7,7 @@ import useToaster from 'store/useToaster';
 import { InputType } from 'components/Input';
 import LabelGroup from 'components/LabelGroup';
 import { useLabels } from 'modules/Labels/hooks';
-import { ButtonType } from 'components/Button';
+import { ButtonType, LinkButton } from 'components/Button';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -55,11 +55,7 @@ function PeopleEdit() {
         />
         <div className="flex mt-8">
           <Button icon="save" label="Save" onClick={save} className="mr-2" />
-          <Button
-            label="Cancel"
-            type={ButtonType.secondary}
-            onClick={() => history.push('/people')}
-          />
+          <LinkButton label="Cancel" type={ButtonType.secondary} to="/people" />
         </div>
       </Block>
     </Page>

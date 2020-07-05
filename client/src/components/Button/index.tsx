@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import Icon from 'components/Icon';
 
@@ -9,11 +10,12 @@ export enum ButtonType {
 
 type PropTypes = {
   label: string;
-  onClick: Function;
+  onClick?: Function;
   disabled?: boolean;
   className?: string;
   type?: ButtonType;
   icon?: string;
+  to?: string;
 };
 
 function Button({
@@ -39,11 +41,17 @@ function Button({
   );
 
   return (
-    <button className={buttonClass} onClick={() => onClick()} disabled={disabled}>
+    <button className={buttonClass} onClick={() => onClick?.()} disabled={disabled}>
       {icon && <Icon icon={icon} className="mr-1" />}
       <span>{label}</span>
     </button>
   );
 }
+
+export const LinkButton = ({ to, ...rest }: PropTypes) => (
+  <Link to={to || '#'}>
+    <Button {...rest} />
+  </Link>
+);
 
 export default Button;
