@@ -53,12 +53,14 @@ function PeopleEdit() {
           disabled
           {...bindInput('submitedAt')}
         />
-        <Button label="Save" onClick={save} className="mr-2 mt-8" />
-        <Button
-          label="Cancel"
-          type={ButtonType.secondary}
-          onClick={() => history.push('/people')}
-        />
+        <div className="flex mt-8">
+          <Button icon="save" label="Save" onClick={save} className="mr-2" />
+          <Button
+            label="Cancel"
+            type={ButtonType.secondary}
+            onClick={() => history.push('/people')}
+          />
+        </div>
       </Block>
     </Page>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Icon from 'components/Icon';
 
 export enum ButtonType {
   primary = 'primary',
@@ -12,11 +13,19 @@ type PropTypes = {
   disabled?: boolean;
   className?: string;
   type?: ButtonType;
+  icon?: string;
 };
 
-function Button({ label, onClick, disabled, className, type = ButtonType.primary }: PropTypes) {
+function Button({
+  label,
+  onClick,
+  disabled,
+  className,
+  type = ButtonType.primary,
+  icon,
+}: PropTypes) {
   const buttonClass = classNames(
-    'py-3 px-6 text-white rounded',
+    'h-12 px-4 text-white rounded inline-flex items-center',
     {
       'bg-blue-700 hover:bg-blue-600': type === ButtonType.primary,
     },
@@ -31,7 +40,8 @@ function Button({ label, onClick, disabled, className, type = ButtonType.primary
 
   return (
     <button className={buttonClass} onClick={() => onClick()} disabled={disabled}>
-      {label}
+      {icon && <Icon icon={icon} className="mr-1" />}
+      <span>{label}</span>
     </button>
   );
 }

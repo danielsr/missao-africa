@@ -50,7 +50,7 @@ function People() {
           />
         </div>
         <div>
-          <Button label="New Person" onClick={() => history.push('/people-edit/0')} />
+          <Button icon="add" label="New Person" onClick={() => history.push('/people-edit/0')} />
         </div>
       </div>
       {items && <GridEdit data={items} fields={fields} editRoute="/people-edit" />}

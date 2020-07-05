@@ -15,7 +15,6 @@
     "@typescript-eslint/parser": "^2.30.0",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
-    "css.gg": "^2.0.0",
     "dayjs": "^1.8.28",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-react": "^1.1.7",
