@@ -1,4 +1,5 @@
 import React, { useRef, useCallback, useEffect } from 'react';
+import Spinner from './Spinner';
 
 type InfiniteScrollProps = {
   loadMore: Function;
@@ -33,7 +34,11 @@ function InfiniteScroll({ loadMore, hasMore, isLoading }: InfiniteScrollProps) {
     return () => observer.unobserve(element);
   }, [loader, loadMoreCallback]);
 
-  return <div ref={loader}>{isLoading && <div>Loading...</div>}</div>;
+  return (
+    <div className="flex justify-center mt-4" ref={loader}>
+      {isLoading && <Spinner />}
+    </div>
+  );
 }
 
 export default InfiniteScroll;

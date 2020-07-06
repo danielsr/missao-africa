@@ -25,7 +25,7 @@ function PeopleImport() {
             disabled={people.length === 0}
             className="mr-2"
           />
-          <LinkButton type={ButtonType.secondary} label="Cancel" to="/people" />
+          <LinkButton type={ButtonType.Secondary} label="Cancel" to="/people" />
         </div>
       </Block>
     </Page>

@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import Icon from 'components/Icon';
+import Spinner, { SpinnerSize, SpinnerColor } from 'components/Spinner';
 
 export enum ButtonType {
-  primary = 'primary',
-  secondary = 'secondary',
+  Primary = 'Primary',
+  Secondary = 'Secondary',
 }
 
 type PropTypes = {
@@ -16,6 +17,7 @@ type PropTypes = {
   type?: ButtonType;
   icon?: string;
   to?: string;
+  working?: boolean;
 };
 
 function Button({
@@ -23,16 +25,17 @@ function Button({
   onClick,
   disabled,
   className,
-  type = ButtonType.primary,
+  type = ButtonType.Primary,
   icon,
+  working,
 }: PropTypes) {
   const buttonClass = classNames(
-    'h-12 px-4 text-white rounded inline-flex items-center',
+    'h-12 px-4 text-white rounded inline-flex items-center font-semibold',
     {
-      'bg-blue-700 hover:bg-blue-600': type === ButtonType.primary,
+      'bg-blue-700 hover:bg-blue-600': type === ButtonType.Primary,
     },
     {
-      'bg-gray-700 hover:bg-gray-600': type === ButtonType.secondary,
+      'bg-gray-700 hover:bg-gray-600': type === ButtonType.Secondary,
     },
     {
       'opacity-75 cursor-not-allowed': disabled,
@@ -42,7 +45,8 @@ function Button({
 
   return (
     <button className={buttonClass} onClick={() => onClick?.()} disabled={disabled}>
-      {icon && <Icon icon={icon} className="mr-1" />}
+      {icon && !working && <Icon icon={icon} className="mr-1" />}
+      {working && <Spinner size={SpinnerSize.Small} color={SpinnerColor.White} className="mr-1" />}
       <span>{label}</span>
     </button>
   );

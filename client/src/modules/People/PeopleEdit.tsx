@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Page, Input, Block } from 'components';
 import useForm from 'hooks/useForm';
@@ -12,17 +12,21 @@ import { ButtonType, LinkButton } from 'components/Button';
 function PeopleEdit() {
   const history = useHistory();
   const { id } = useParams();
+  const [saving, setSaving] = useState(false);
   const { values, setValues, bindInput } = useForm({});
   const { showToaster } = useToaster();
   const { labels } = useLabels();
 
   const save = async () => {
     try {
+      setSaving(true);
       await api.savePerson(values);
       history.push('/people');
       showToaster('People saved!');
     } catch (error) {
       console.log(error);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -54,8 +58,8 @@ function PeopleEdit() {
           {...bindInput('submitedAt')}
         />
         <div className="flex mt-8">
-          <Button icon="save" label="Save" onClick={save} className="mr-2" />
-          <LinkButton label="Cancel" type={ButtonType.secondary} to="/people" />
+          <Button icon="save" label="Save" onClick={save} className="mr-2" working={saving} />
+          <LinkButton label="Cancel" type={ButtonType.Secondary} to="/people" />
         </div>
       </Block>
     </Page>
