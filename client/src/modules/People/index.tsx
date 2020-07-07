@@ -8,6 +8,7 @@ import usePagination from 'hooks/usePagination';
 import { Person } from 'types';
 import api from 'services/api';
 import { useLabels } from 'modules/Labels/hooks';
+import PeopleEdit from './PeopleEdit';
 
 function People() {
   const { labels } = useLabels();
@@ -42,6 +43,7 @@ function People() {
       />
       {items && <GridEdit data={items} fields={fields} editRoute="/people-edit" />}
       <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={nextPage} />
+      <PeopleEdit />
     </Page>
   );
 }
