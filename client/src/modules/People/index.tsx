@@ -25,12 +25,8 @@ function People() {
   ];
   const [people, fetchPeople] = useFetch(api.getPeople);
   const { data, isLoading } = people;
-  const { setSearch, search, debouncedSearch } = useSearch();
-  const { nextPage, setPageIndex, pageIndex, hasMore, items } = usePagination<Person>(data);
-
-  useEffect(() => {
-    setPageIndex(1);
-  }, [debouncedSearch, setPageIndex]);
+  const { nextPage, resetPagination, pageIndex, hasMore, items } = usePagination<Person>(data);
+  const { setSearch, search, debouncedSearch } = useSearch(resetPagination);
 
   useEffect(() => {
     fetchPeople(debouncedSearch, pageIndex);

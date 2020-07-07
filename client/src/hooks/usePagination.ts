@@ -17,11 +17,16 @@ export default function usePagination<T>(data: any) {
     setPageIndex(pageIndex + 1);
   };
 
+  const resetPagination = () => {
+    setPageIndex(1);
+  };
+
   return {
     pageIndex,
     setPageIndex,
-    nextPage,
     items,
     hasMore,
+    nextPage,
+    resetPagination,
   };
 }

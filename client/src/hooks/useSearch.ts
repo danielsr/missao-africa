@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import useDebounce from 'hooks/useDebounce';
 import useQuery from 'hooks/useQuery';
 
-export default function useSearch() {
+export default function useSearch(callback?: Function) {
   const history = useHistory();
   const query = useQuery();
   const searchQuery = query.get('search') || '';
@@ -13,6 +13,7 @@ export default function useSearch() {
 
   useEffect(() => {
     history.replace(`?search=${debouncedSearch}`);
+    callback?.();
   }, [debouncedSearch, history]);
 
   return {
