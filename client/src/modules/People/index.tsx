@@ -8,7 +8,6 @@ import usePagination from 'hooks/usePagination';
 import { Person } from 'types';
 import api from 'services/api';
 import { useLabels } from 'modules/Labels/hooks';
-import PeopleEdit from './PeopleEdit';
 
 function People() {
   const { labels } = useLabels();
@@ -34,16 +33,15 @@ function People() {
   }, [debouncedSearch, pageIndex, fetchPeople]);
 
   return (
-    <Page title="People" newLabel="New Person" newRoute="/people-edit/0">
+    <Page title="People" newLabel="New Person" newRoute="/people/0">
       <Input
         placeHolder="Search people..."
         className="w-1/2 mb-4"
         value={search}
         onChange={setSearch}
       />
-      {items && <GridEdit data={items} fields={fields} editRoute="/people-edit" />}
+      {items && <GridEdit data={items} fields={fields} editRoute="/people" />}
       <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={nextPage} />
-      <PeopleEdit />
     </Page>
   );
 }
