@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Input, Block } from 'components';
+import { Button, Input } from 'components';
 import useForm from 'hooks/useForm';
 import api from 'services/api';
 import useToaster from 'store/useToaster';
@@ -31,7 +31,7 @@ function LabelsEdit() {
       const label = labels.find((label) => label.id === parseInt(id, 10));
       setValues(label);
     }
-  }, [labels]);
+  }, [labels, id, setValues]);
 
   const modalFooter = () => (
     <>
