@@ -4,9 +4,10 @@
 
 ## Frontend
 
-[ ] Use modal for forms
-[ ] Fix menu active regarding the route
-[ ] Nested routes best pratice
+[x] Use modal for forms
+[x] Fix menu active regarding the route
+[x] Nested routes best pratice
+[ ] Solve exhaustive-deps warnings
 [ ] Form validation
 [ ] User info (context?)
 [ ] User name besides email

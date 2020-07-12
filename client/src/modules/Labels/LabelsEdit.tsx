@@ -12,7 +12,7 @@ import { LinkButton, ButtonType } from 'components/Button';
 function LabelsEdit() {
   const history = useHistory();
   const { id } = useParams();
-  const { labels } = useLabels();
+  const { labels, loadLabels } = useLabels();
   const { values, setValues, bindInput } = useForm({ name: '', color: '', description: '' });
   const { showToaster } = useToaster();
 
@@ -21,6 +21,7 @@ function LabelsEdit() {
       await api.saveLabel(values);
       history.push('/labels');
       showToaster('Label saved!');
+      loadLabels();
     } catch (error) {
       console.log(error);
     }
