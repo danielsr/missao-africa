@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Page, Input, Block } from 'components';
+import { Button, Input, Block } from 'components';
 import useForm from 'hooks/useForm';
 import api from 'services/api';
 import useToaster from 'store/useToaster';
 import { useLabels } from './hooks';
 import { InputType } from 'components/Input';
+import Modal from 'components/Modal';
+import { LinkButton, ButtonType } from 'components/Button';
 
 function LabelsEdit() {
   const history = useHistory();
@@ -31,21 +33,19 @@ function LabelsEdit() {
     }
   }, [labels]);
 
+  const modalFooter = () => (
+    <>
+      <Button label="Save" onClick={save} className="mr-2" icon="save" />
+      <LinkButton label="Cancel" type={ButtonType.Secondary} to="/labels" />
+    </>
+  );
+
   return (
-    <Page title="Labels Form">
-      <div className="flex justify-between py-4">
-        <div></div>
-        <div>
-          <Button label="Save" onClick={save} />
-          <Button label="Cancel" onClick={() => history.push('/labels')} />
-        </div>
-      </div>
-      <Block>
-        <Input label="Name" className="mb-2" {...bindInput('name')} />
-        <Input label="Description" className="mb-2" {...bindInput('description')} />
-        <Input label="Color" type={InputType.color} {...bindInput('color')} />
-      </Block>
-    </Page>
+    <Modal title="Labels Edit" footer={modalFooter}>
+      <Input label="Name" className="mb-2" {...bindInput('name')} />
+      <Input label="Description" className="mb-2" {...bindInput('description')} />
+      <Input label="Color" type={InputType.color} {...bindInput('color')} />
+    </Modal>
   );
 }
 

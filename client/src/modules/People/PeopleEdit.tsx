@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Page, Input, Block } from 'components';
+import { Button, Input } from 'components';
 import useForm from 'hooks/useForm';
 import api from 'services/api';
 import useToaster from 'store/useToaster';
@@ -9,6 +9,7 @@ import LabelGroup from 'components/LabelGroup';
 import { useLabels } from 'modules/Labels/hooks';
 import { ButtonType, LinkButton } from 'components/Button';
 import Spinner from 'components/Spinner';
+import Modal from 'components/Modal';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -49,10 +50,17 @@ function PeopleEdit() {
     fetchPerson();
   }, [id, setValues, setLoading]);
 
+  const modalFooter = () => (
+    <>
+      <Button icon="save" label="Save" onClick={save} className="mr-2" working={saving} />
+      <LinkButton label="Cancel" type={ButtonType.Secondary} to="/people" />
+    </>
+  );
+
   return (
-    <Page title="People">
+    <Modal title="People Edit" footer={modalFooter}>
       {!loading ? (
-        <Block>
+        <>
           <LabelGroup labels={labels} value={values.labels} />
           <Input label="Name" className="mb-2 mt-4" {...bindInput('name')} />
           <Input label="Email" className="mb-2" {...bindInput('email')} />
@@ -67,15 +75,11 @@ function PeopleEdit() {
             disabled
             {...bindInput('submitedAt')}
           />
-          <div className="flex mt-8">
-            <Button icon="save" label="Save" onClick={save} className="mr-2" working={saving} />
-            <LinkButton label="Cancel" type={ButtonType.Secondary} to="/people" />
-          </div>
-        </Block>
+        </>
       ) : (
         <Spinner />
       )}
-    </Page>
+    </Modal>
   );
 }
 

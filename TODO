@@ -1,26 +1,21 @@
 ## Backend
 
 [ ] Serve built client files with Express
-[ ] Labels
 
 ## Frontend
 
-[ ] Multi selection
+[ ] Use modal for forms
+[ ] Fix menu active regarding the route
+[ ] Nested routes best pratice
 [ ] Form validation
 [ ] User info (context?)
 [ ] User name besides email
 [ ] Logout
 [ ] Organize styles
-[ ] Avoid duplicates
+[ ] Avoid duplicates when importing
 [ ] Validate CPF
-[x] Import all fields
 [ ] Tailwind bundle size
 [ ] Delete sponsor
-[ ] Import feedback
-
-## Bugs
-
-[ ] Investigate possible loop useFetch when the api is down
 
 ## DevOps
 

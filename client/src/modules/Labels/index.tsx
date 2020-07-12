@@ -24,7 +24,7 @@ function Labels() {
   return (
     <Page title="Labels">
       {labels && labels.length > 0 && (
-        <GridEdit data={labels} fields={fields} editRoute="/labels-edit" />
+        <GridEdit data={labels} fields={fields} editRoute="/labels" />
       )}
     </Page>
   );
