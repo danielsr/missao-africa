@@ -8,6 +8,7 @@ import api from 'services/api';
 import useToaster from 'store/useToaster';
 import { useLabels } from 'modules/Labels/hooks';
 import { toDatetimeLocal } from 'util/date';
+import { required, email } from 'util/validation';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -19,7 +20,11 @@ function PeopleEdit() {
   const initialValues = {
     submitedAt: toDatetimeLocal(new Date().toUTCString()),
   };
-  const { values, setValues, bindInput } = useForm(initialValues);
+  const formValidation = {
+    name: [required],
+    email: [required, email],
+  };
+  const { values, setValues, bindInput } = useForm(initialValues, formValidation);
 
   const save = async () => {
     try {

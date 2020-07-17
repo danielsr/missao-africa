@@ -1,5 +1,5 @@
 import React from 'react';
-import { toDatetimeLocal } from '../util/date';
+import { toDatetimeLocal } from 'util/date';
 
 export enum InputType {
   text = 'text',
@@ -12,21 +12,26 @@ type PropTypes = {
   label?: string;
   placeHolder?: string;
   onChange?: Function;
+  onBlur?: Function;
   className?: string;
   value?: string;
   type?: InputType;
   disabled?: boolean;
+  error?: string;
+  touched?: boolean;
 };
 
 export default function Input({
   label,
   placeHolder,
   onChange,
+  onBlur,
   className,
   value,
   type = InputType.text,
   disabled = false,
-  ...inputProps
+  error,
+  touched,
 }: PropTypes) {
   const inputClass =
     type === InputType.color ? '' : 'border border-gray-400 p-2 text-gray-800 rounded outline-none';
@@ -40,10 +45,11 @@ export default function Input({
         className={inputClass}
         placeholder={placeHolder}
         onChange={(e) => onChange?.(e.target.value)}
+        onBlur={(e) => onBlur?.(e.target.value)}
         value={formatedValue}
         disabled={disabled}
-        {...inputProps}
       />
+      {error && touched && <div className="text-red-800 text-sm ml-1 mt-1">{error}</div>}
     </div>
   );
 }
