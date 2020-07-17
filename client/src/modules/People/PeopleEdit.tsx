@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Input } from 'components';
-import useForm from 'hooks/useForm';
+import { Input, LabelGroup, Button, LinkButton, Spinner, Modal } from 'components';
+import { InputType } from 'components/Input';
+import { ButtonType } from 'components/Button';
+import { useForm } from 'hooks';
 import api from 'services/api';
 import useToaster from 'store/useToaster';
-import { InputType } from 'components/Input';
-import LabelGroup from 'components/LabelGroup';
 import { useLabels } from 'modules/Labels/hooks';
-import { ButtonType, LinkButton } from 'components/Button';
-import Spinner from 'components/Spinner';
-import Modal from 'components/Modal';
+import { toDatetimeLocal } from 'util/date';
 
 function PeopleEdit() {
   const history = useHistory();
   const { id } = useParams();
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { values, setValues, bindInput } = useForm({});
   const { showToaster } = useToaster();
   const { labels } = useLabels();
+  const initialValues = {
+    submitedAt: toDatetimeLocal(new Date().toUTCString()),
+  };
+  const { values, setValues, bindInput } = useForm(initialValues);
 
   const save = async () => {
     try {
@@ -59,7 +60,9 @@ function PeopleEdit() {
 
   return (
     <Modal title="People Edit" footer={modalFooter}>
-      {!loading ? (
+      {loading ? (
+        <Spinner />
+      ) : (
         <>
           <LabelGroup labels={labels} value={values.labels} />
           <Input label="Name" className="mb-2 mt-4" {...bindInput('name')} />
@@ -76,8 +79,6 @@ function PeopleEdit() {
             {...bindInput('submitedAt')}
           />
         </>
-      ) : (
-        <Spinner />
       )}
     </Modal>
   );

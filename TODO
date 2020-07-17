@@ -4,19 +4,17 @@
 
 ## Frontend
 
-[x] Use modal for forms
-[x] Fix menu active regarding the route
-[x] Nested routes best pratice
-[ ] Solve exhaustive-deps warnings
 [ ] Form validation
 [ ] User info (context?)
+[ ] Get done the Import people flow
+[ ] Only redirect to login page when 401
+[ ] Solve exhaustive-deps warnings
+[ ] Validate CPF
 [ ] User name besides email
 [ ] Logout
 [ ] Organize styles
-[ ] Avoid duplicates when importing
-[ ] Validate CPF
-[ ] Tailwind bundle size
 [ ] Delete sponsor
+[ ] Tailwind bundle size
 
 ## DevOps
 
