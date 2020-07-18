@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid, { GridProps } from './Grid';
+import Grid, { GridProps } from '.';
 import { Link } from 'react-router-dom';
 
 interface GridEditProps extends GridProps {

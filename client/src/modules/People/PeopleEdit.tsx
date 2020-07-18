@@ -89,7 +89,7 @@ function PeopleEdit() {
             label="Submited at"
             type={InputType.datetimeLocal}
             className="mb-2"
-            disabled
+            disabled={values.id}
             {...bindInput('submitedAt')}
           />
         </>
