@@ -73,7 +73,7 @@ function PeopleEdit() {
   );
 
   return (
-    <Modal title="People Edit" footer={modalFooter} size={ModalSize.Full}>
+    <Modal title="People Edit" footer={modalFooter} size={ModalSize.Large}>
       {loading ? (
         <Spinner />
       ) : (

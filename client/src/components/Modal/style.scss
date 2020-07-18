@@ -1,0 +1,26 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.6);
+
+  .modalBody {
+    &.Auto {
+      width: auto;
+      height: auto;
+    }
+    &.Small {
+      width: 500px;
+      max-height: 500px;
+    }
+    &.Regular {
+      width: 800px;
+      max-height: 700px;
+    }
+    &.Large {
+      width: 90vw;
+      height: 90vh;
+    }
+    &.Full {
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+}

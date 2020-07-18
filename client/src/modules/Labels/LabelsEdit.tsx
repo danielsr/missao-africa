@@ -6,7 +6,7 @@ import api from 'services/api';
 import useToaster from 'store/useToaster';
 import { useLabels } from './hooks';
 import { InputType } from 'components/Input';
-import Modal from 'components/Modal';
+import Modal, { ModalSize } from 'components/Modal';
 import { LinkButton, ButtonType } from 'components/Button';
 
 function LabelsEdit() {
@@ -42,7 +42,7 @@ function LabelsEdit() {
   );
 
   return (
-    <Modal title="Labels Edit" footer={modalFooter}>
+    <Modal title="Labels Edit" footer={modalFooter} size={ModalSize.Small}>
       <Input label="Name" className="mb-2" {...bindInput('name')} />
       <Input label="Description" className="mb-2" {...bindInput('description')} />
       <Input label="Color" type={InputType.color} {...bindInput('color')} />
