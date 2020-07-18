@@ -23,8 +23,9 @@ function PeopleEdit() {
   const formValidation = {
     name: [required],
     email: [required, email],
+    cpf: [required],
   };
-  const { values, setValues, bindInput } = useForm(initialValues, formValidation);
+  const { invalid, values, setValues, bindInput } = useForm(initialValues, formValidation);
 
   const save = async () => {
     try {
@@ -58,7 +59,14 @@ function PeopleEdit() {
 
   const modalFooter = () => (
     <>
-      <Button icon="save" label="Save" onClick={save} className="mr-2" working={saving} />
+      <Button
+        icon="save"
+        label="Save"
+        onClick={save}
+        className="mr-2"
+        working={saving}
+        disabled={invalid}
+      />
       <LinkButton label="Cancel" type={ButtonType.Secondary} to="/people" />
     </>
   );
