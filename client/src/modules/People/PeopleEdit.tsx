@@ -9,6 +9,7 @@ import useToaster from 'store/useToaster';
 import { useLabels } from 'modules/Labels/hooks';
 import { toDatetimeLocal } from 'util/date';
 import { required, email } from 'util/validation';
+import { ModalSize } from 'components/Modal';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -72,7 +73,7 @@ function PeopleEdit() {
   );
 
   return (
-    <Modal title="People Edit" footer={modalFooter}>
+    <Modal title="People Edit" footer={modalFooter} size={ModalSize.Full}>
       {loading ? (
         <Spinner />
       ) : (
