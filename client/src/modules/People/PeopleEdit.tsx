@@ -10,6 +10,7 @@ import { useLabels } from 'modules/Labels/hooks';
 import { toDatetimeLocal } from 'util/date';
 import { required, email, cpf } from 'util/validation';
 import { ModalSize } from 'components/Modal';
+import Tabs from 'components/Tabs';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -79,19 +80,25 @@ function PeopleEdit() {
       ) : (
         <>
           <LabelGroup labels={labels} value={values.labels} />
-          <Input label="Name" className="mb-2 mt-4" {...bindInput('name')} />
-          <Input label="Email" className="mb-2" {...bindInput('email')} />
-          <Input label="CPF" className="mb-2" {...bindInput('cpf')} />
-          <Input label="Phone" className="mb-2" {...bindInput('phone')} />
-          <Input label="Address" className="mb-2" {...bindInput('address')} />
-          <Input label="Notes" className="mb-2" {...bindInput('notes')} />
-          <Input
-            label="Submited at"
-            type={InputType.datetimeLocal}
-            className="mb-2"
-            disabled={values.id}
-            {...bindInput('submitedAt')}
-          />
+          <div className="flex mb-2 mt-4">
+            <Input label="Name" className="w-1/2 mr-4" {...bindInput('name')} />
+            <Input label="Email" className="w-1/2" {...bindInput('email')} />
+          </div>
+          <div className="flex mb-2">
+            <Input label="CPF" className="w-1/2 mr-4" {...bindInput('cpf')} />
+            <Input label="Phone" className="w-1/2" {...bindInput('phone')} />
+          </div>
+          <div className="flex mb-2">
+            <Input label="Address" className="w-1/2 mr-4" {...bindInput('address')} />
+            <Input
+              label="Submited at"
+              type={InputType.datetimeLocal}
+              className="w-1/2"
+              disabled={values.id}
+              {...bindInput('submitedAt')}
+            />
+          </div>
+          <Input label="Notes" {...bindInput('notes')} />
         </>
       )}
     </Modal>
