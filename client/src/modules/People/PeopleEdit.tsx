@@ -8,7 +8,7 @@ import api from 'services/api';
 import useToaster from 'store/useToaster';
 import { useLabels } from 'modules/Labels/hooks';
 import { toDatetimeLocal } from 'util/date';
-import { required, email } from 'util/validation';
+import { required, email, cpf } from 'util/validation';
 import { ModalSize } from 'components/Modal';
 
 function PeopleEdit() {
@@ -24,7 +24,7 @@ function PeopleEdit() {
   const formValidation = {
     name: [required],
     email: [required, email],
-    cpf: [required],
+    cpf: [required, cpf],
   };
   const { invalid, values, setValues, bindInput } = useForm(initialValues, formValidation);
 

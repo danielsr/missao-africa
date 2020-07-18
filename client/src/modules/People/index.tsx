@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { format as formatCpf } from '@fnando/cpf';
 import { Page, Input, GridEdit, InfiniteScroll } from 'components';
 import { GridField } from 'components/Grid';
 import LabelGroup from 'components/LabelGroup';
@@ -14,7 +15,13 @@ function People() {
   const fields: GridField[] = [
     { name: 'name', label: 'Name' },
     { name: 'email', label: 'Email' },
-    { name: 'cpf', label: 'CPF' },
+    {
+      name: 'cpf',
+      label: 'CPF',
+      renderFunction(row) {
+        return formatCpf(row.cpf);
+      },
+    },
     {
       name: 'labels',
       label: 'Labels',
