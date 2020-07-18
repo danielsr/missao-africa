@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link, useLocation, matchPath } from 'react-router-dom';
-import 'css.gg/icons/css/user-list.css';
-import 'css.gg/icons/css/user-add.css';
-import 'css.gg/icons/css/tag.css';
 import Icon from 'components/Icon';
 
 function SideMenu() {
