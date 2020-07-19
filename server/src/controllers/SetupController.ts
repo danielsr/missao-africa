@@ -13,6 +13,7 @@ export default class SetupController {
         }
 
         const user = new User();
+        user.name = 'Daniel';
         user.email = 'danielsr@gmail.com';
         user.password = 'admin';
         user.hashPassword();

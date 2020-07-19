@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { useForm } from '../hooks';
-import { Input, Button } from '../components';
-import api from '../services/api';
-import { setToken, redirectToReturnUrl } from '../services/auth';
-import { InputType } from '../components/Input';
+import { useForm } from 'hooks';
+import { Input, Button } from 'components';
+import { InputType } from 'components/Input';
+import api from 'services/api';
+import { setToken, redirectToReturnUrl, setUser } from 'services/auth';
 
 function Login() {
-  const { values, bindInput } = useForm({ email: '', password: '' });
+  const { values, bindInput } = useForm();
   const [error, setError] = useState(false);
 
   const login = async () => {
     try {
-      const resp = await api.login(values);
-      setToken(resp.data);
+      const { data } = await api.login(values);
+      setToken(data.token);
+      setUser(data.user);
       redirectToReturnUrl();
     } catch (error) {
       setError(true);

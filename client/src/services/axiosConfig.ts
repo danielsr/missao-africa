@@ -24,7 +24,7 @@ axios.interceptors.response.use(
     return response;
   },
   function (error) {
-    if (error.response.status) {
+    if (error.response.status === 401) {
       redirectToLoginPage();
     }
     return Promise.reject(error);

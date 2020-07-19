@@ -25,8 +25,10 @@ export default class AuthController {
             next(Unauthorized);
         }
 
-        const token = jwt.sign({ userId: user.id, email: user.email }, jwtSecret, { expiresIn: '1h' });
+        const tokenData = { id: user.id, name: user.name, email: user.email };
 
-        return token;
+        const token = jwt.sign(tokenData, jwtSecret, { expiresIn: '1h' });
+
+        return { user: tokenData, token };
     };
 }

@@ -13,10 +13,19 @@ export function redirectToReturnUrl() {
   history.push(queryParams.get('redirectUrl') ?? '/');
 }
 
+export function setUser(user) {
+  localStorage.setItem('user', JSON.stringify(user));
+}
+
+export function getUser() {
+  const user = localStorage.getItem('user');
+  return user && JSON.parse(user);
+}
+
 export function setToken(token) {
-  sessionStorage.setItem('token', token);
+  localStorage.setItem('token', token);
 }
 
 export function getToken() {
-  return sessionStorage.getItem('token');
+  return localStorage.getItem('token');
 }
