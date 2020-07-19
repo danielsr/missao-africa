@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import logo from 'assets/img/logo.png';
 import style from './style.module.scss';
 import Icon from 'components/Icon';
-import { getUser } from 'services/auth';
+import useUser from 'modules/Login/hooks';
 
 function TopBar() {
-  const [user, setUser]: any = useState({});
-
-  useEffect(() => {
-    setUser(getUser());
-  }, []);
+  const { user } = useUser();
 
   return (
     <nav className="fixed top-0 left-0 right-0 h-20 bg-white shadow flex justify-between p-3 items-center">

@@ -3,11 +3,13 @@ import { useForm } from 'hooks';
 import { Input, Button } from 'components';
 import { InputType } from 'components/Input';
 import api from 'services/api';
-import { setToken, redirectToReturnUrl, setUser } from 'services/auth';
+import { setToken, redirectToReturnUrl } from 'services/auth';
+import useUser from './hooks';
 
 function Login() {
   const { values, bindInput } = useForm();
   const [error, setError] = useState(false);
+  const { setUser } = useUser();
 
   const login = async () => {
     try {

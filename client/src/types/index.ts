@@ -15,3 +15,9 @@ export type Label = {
   color: string;
   description?: string;
 };
+
+export type User = {
+  name: string;
+  email: string;
+  id: string;
+};

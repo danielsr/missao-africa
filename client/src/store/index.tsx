@@ -1,10 +1,15 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react';
 import { initialState as toaster, toasterActions } from './toaster';
 import { initialState as labels, labelsActions } from './labels';
+import { initialState as user, userActions } from 'modules/Login/state';
 
-const initialState = { toaster, labels };
+const initialState = { toaster, labels, user };
 
-const actions = { ...toasterActions, ...labelsActions };
+const actions = {
+  ...toasterActions,
+  ...labelsActions,
+  ...userActions,
+};
 
 const reducer = (state, action) => {
   return actions[action.type]?.(state, action) ?? state;
