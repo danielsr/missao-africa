@@ -26,7 +26,7 @@ function PeopleImport() {
   return (
     <Page title="Import People">
       <Block>
-        <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} />
+        <Tabs tabs={tabs} active={activeTab} onChange={setActiveTab} className="border-b" />
         {activeTab === 'file' && (
           <div className="mt-8">
             <InputFile onChange={importFile} />

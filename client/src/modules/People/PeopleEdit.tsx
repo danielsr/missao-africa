@@ -10,7 +10,7 @@ import { useLabels } from 'modules/Labels/hooks';
 import { toDatetimeLocal } from 'util/date';
 import { required, email, cpf } from 'util/validation';
 import { ModalSize } from 'components/Modal';
-import Tabs from 'components/Tabs';
+import Tabs, { Tab } from 'components/Tabs';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -19,6 +19,7 @@ function PeopleEdit() {
   const [loading, setLoading] = useState(false);
   const { showToaster } = useToaster();
   const { labels } = useLabels();
+
   const initialValues = {
     submitedAt: toDatetimeLocal(new Date().toUTCString()),
   };
@@ -28,6 +29,12 @@ function PeopleEdit() {
     cpf: [required, cpf],
   };
   const { invalid, values, setValues, bindInput } = useForm(initialValues, formValidation);
+
+  const [activeTab, setActiveTab] = useState('personal');
+  const tabs: Tab[] = [
+    { name: 'personal', label: 'Personal Data' },
+    { name: 'boleto', label: 'Boleto Bancario' },
+  ];
 
   const save = async () => {
     try {
@@ -59,6 +66,44 @@ function PeopleEdit() {
     fetchPerson();
   }, [id, setValues, setLoading]);
 
+  const renderForm = () => (
+    <div>
+      <LabelGroup labels={labels} value={values.labels} />
+      <div className="flex mb-2 mt-4">
+        <Input label="Name" className="w-1/2 mr-4" {...bindInput('name')} />
+        <Input label="Email" className="w-1/2" {...bindInput('email')} />
+      </div>
+      <div className="flex mb-2">
+        <Input label="CPF" className="w-1/2 mr-4" {...bindInput('cpf')} />
+        <Input label="Phone" className="w-1/2" {...bindInput('phone')} />
+      </div>
+      <div className="flex mb-2">
+        <Input label="Address" className="w-1/2 mr-4" {...bindInput('address')} />
+        <Input
+          label="Submited at"
+          type={InputType.datetimeLocal}
+          className="w-1/2"
+          disabled={values.id}
+          {...bindInput('submitedAt')}
+        />
+      </div>
+      <Input label="Notes" {...bindInput('notes')} />
+    </div>
+  );
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'personal':
+        return renderForm();
+      default:
+        return <div>...</div>;
+    }
+  };
+
+  const modalHeader = () => (
+    <Tabs className="mx-4" tabs={tabs} active={activeTab} onChange={setActiveTab} />
+  );
+
   const modalFooter = () => (
     <>
       <Button
@@ -74,33 +119,14 @@ function PeopleEdit() {
   );
 
   return (
-    <Modal title="People Edit" footer={modalFooter} size={ModalSize.Large}>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <LabelGroup labels={labels} value={values.labels} />
-          <div className="flex mb-2 mt-4">
-            <Input label="Name" className="w-1/2 mr-4" {...bindInput('name')} />
-            <Input label="Email" className="w-1/2" {...bindInput('email')} />
-          </div>
-          <div className="flex mb-2">
-            <Input label="CPF" className="w-1/2 mr-4" {...bindInput('cpf')} />
-            <Input label="Phone" className="w-1/2" {...bindInput('phone')} />
-          </div>
-          <div className="flex mb-2">
-            <Input label="Address" className="w-1/2 mr-4" {...bindInput('address')} />
-            <Input
-              label="Submited at"
-              type={InputType.datetimeLocal}
-              className="w-1/2"
-              disabled={values.id}
-              {...bindInput('submitedAt')}
-            />
-          </div>
-          <Input label="Notes" {...bindInput('notes')} />
-        </>
-      )}
+    <Modal
+      title={`Person: ${values.name || 'New'}`}
+      footer={modalFooter}
+      header={modalHeader}
+      size={ModalSize.Large}
+      closeRoute="/people"
+    >
+      {loading ? <Spinner /> : renderContent()}
     </Modal>
   );
 }
