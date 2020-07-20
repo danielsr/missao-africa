@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Label } from 'types';
 import LabelGroup from 'components/LabelGroup';
-import Input from 'components/Input';
 
 type PropTypes = {
   labels?: Label[];
@@ -12,23 +11,23 @@ type PropTypes = {
 function LabelInput({ labels, value, onChange }: PropTypes) {
   const [inputValue, setInputValue] = useState('');
 
-  const onChangeInput = (newValue) => {
-    setInputValue(newValue);
-
-    if (labels?.find((label) => label.name === newValue)) {
-      onChange?.(value ? [...value, newValue] : [newValue]);
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter' && labels?.find((label) => label.name === inputValue)) {
+      onChange?.(value ? [...value, inputValue] : [inputValue]);
       setInputValue('');
+    } else if (e.key === 'Backspace' && inputValue === '') {
+      onChange?.(value?.slice(0, value.length - 1));
     }
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center border border-gray-400 rounded bg-white p-2">
       <LabelGroup value={value} labels={labels} />
-      <Input
-        className="ml-2"
-        listOptions={labels?.map((option) => option.name)}
+      <input
+        className="ml-1 outline-none w-full"
         value={inputValue}
-        onChange={onChangeInput}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={onKeyDown}
       />
     </div>
   );
