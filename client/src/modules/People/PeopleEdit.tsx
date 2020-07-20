@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Input, LabelGroup, Button, LinkButton, Spinner, Modal } from 'components';
+import { Input, Button, LinkButton, Spinner, Modal } from 'components';
 import { InputType } from 'components/Input';
 import { ButtonType } from 'components/Button';
 import { useForm } from 'hooks';
@@ -11,6 +11,7 @@ import { toDatetimeLocal } from 'util/date';
 import { required, email, cpf } from 'util/validation';
 import { ModalSize } from 'components/Modal';
 import Tabs, { Tab } from 'components/Tabs';
+import LabelInput from 'components/LabelInput';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -68,7 +69,7 @@ function PeopleEdit() {
 
   const renderForm = () => (
     <div>
-      <LabelGroup labels={labels} value={values.labels} />
+      <LabelInput labels={labels} {...bindInput('labels')} />
       <div className="flex mb-2 mt-4">
         <Input label="Name" className="w-1/2 mr-4" {...bindInput('name')} />
         <Input label="Email" className="w-1/2" {...bindInput('email')} />

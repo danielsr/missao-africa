@@ -19,6 +19,7 @@ type PropTypes = {
   disabled?: boolean;
   error?: string;
   touched?: boolean;
+  listOptions?: string[];
 };
 
 export default function Input({
@@ -32,6 +33,7 @@ export default function Input({
   disabled = false,
   error,
   touched,
+  listOptions,
 }: PropTypes) {
   const inputClass =
     type === InputType.color ? '' : 'border border-gray-400 p-2 text-gray-800 rounded outline-none';
@@ -48,8 +50,16 @@ export default function Input({
         onBlur={(e) => onBlur?.(e.target.value)}
         value={formatedValue}
         disabled={disabled}
+        list={listOptions && 'listOptions'}
       />
       {error && touched && <div className="text-red-800 text-sm ml-1 mt-1">{error}</div>}
+      {listOptions && (
+        <datalist id="listOptions">
+          {listOptions.map((option) => (
+            <option key={option} value={option}></option>
+          ))}
+        </datalist>
+      )}
     </div>
   );
 }
