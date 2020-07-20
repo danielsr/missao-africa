@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'hooks';
-import { Input, Button } from 'components';
+import { Input, Button, Modal } from 'components';
 import { InputType } from 'components/Input';
 import api from 'services/api';
 import { setToken, redirectToReturnUrl } from 'services/auth';
 import useUser from './hooks';
+import { ModalSize } from 'components/Modal';
 
 function Login() {
   const { values, bindInput } = useForm();
@@ -23,22 +24,17 @@ function Login() {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-500 flex items-center justify-center">
-      <div className="shadow-lg rounded w-1/4 bg-gray-200">
-        <div className="bg-blue-900 text-white p-3 rounded-t">Login</div>
-        <div className="p-3">
-          <Input label="E-mail" className="mb-2" {...bindInput('email')} />
-          <Input
-            label="Password"
-            type={InputType.password}
-            className="mb-2"
-            {...bindInput('password')}
-          />
-          <Button label="Login" onClick={login} />
-          {error && <div>Invalid user</div>}
-        </div>
-      </div>
-    </div>
+    <Modal title="Login" size={ModalSize.Small}>
+      <Input label="E-mail" className="mb-2" {...bindInput('email')} />
+      <Input
+        label="Password"
+        type={InputType.password}
+        className="mb-2"
+        {...bindInput('password')}
+      />
+      <Button className="mt-4" label="Login" onClick={login} />
+      {error && <div>Invalid user</div>}
+    </Modal>
   );
 }
 
