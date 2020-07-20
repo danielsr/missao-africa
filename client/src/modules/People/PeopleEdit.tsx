@@ -69,8 +69,7 @@ function PeopleEdit() {
 
   const renderForm = () => (
     <div>
-      <LabelInput labels={labels} {...bindInput('labels')} />
-      <div className="flex mb-2 mt-4">
+      <div className="flex mb-2">
         <Input label="Name" className="w-1/2 mr-4" {...bindInput('name')} />
         <Input label="Email" className="w-1/2" {...bindInput('email')} />
       </div>
@@ -88,7 +87,8 @@ function PeopleEdit() {
           {...bindInput('submitedAt')}
         />
       </div>
-      <Input label="Notes" {...bindInput('notes')} />
+      <Input label="Notes" className="mb-2" {...bindInput('notes')} />
+      <LabelInput label="Labels" labels={labels} {...bindInput('labels')} />
     </div>
   );
 
