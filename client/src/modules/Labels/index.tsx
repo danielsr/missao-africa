@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { GridField } from 'components/Grid';
-import { Page, GridEdit } from 'components';
+import { Page, Grid } from 'components';
 import { useLabels } from './hooks';
 import Label from 'components/Label';
+import { Link } from 'react-router-dom';
 
 function Labels() {
   const { labels, loadLabels } = useLabels();
@@ -10,9 +11,11 @@ function Labels() {
     {
       name: 'name',
       label: 'Label',
-      renderFunction(row) {
-        return <Label name={row.name} color={row.color} />;
-      },
+      renderFunction: (row) => (
+        <Link to={`/labels/${row.id}`}>
+          <Label name={row.name} color={row.color} />
+        </Link>
+      ),
     },
     { name: 'description', label: 'Description' },
   ];
@@ -23,9 +26,7 @@ function Labels() {
 
   return (
     <Page title="Labels" newLabel="New Label" newRoute="/labels/0">
-      {labels && labels.length > 0 && (
-        <GridEdit data={labels} fields={fields} editRoute="/labels" />
-      )}
+      {labels && labels.length > 0 && <Grid data={labels} fields={fields} />}
     </Page>
   );
 }

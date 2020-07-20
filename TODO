@@ -4,17 +4,18 @@
 
 ## Frontend
 
-[x] Form validation
-[ ] User info (context?)
+[x] People modal when clicking on name, no edit button
+[ ] Label Input component
+[ ] Move user state and hook to global store folder
 [ ] Get done the Import people flow
-[ ] Only redirect to login page when 401
+[ ] Label ids instead of label name
 [ ] Solve exhaustive-deps warnings
-[x] Validate CPF
-[ ] User name besides email
-[ ] Logout
 [ ] Organize styles
 [ ] Delete sponsor
 [ ] Tailwind bundle size
+[ ] Change password
+[ ] Setup page
+[ ] Users module
 
 ## DevOps
 

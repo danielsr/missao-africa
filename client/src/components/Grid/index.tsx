@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export type GridField = {
   name: string;
   label: string;
   align?: string;
+  linkTo?: Function;
   renderFunction?: Function;
 };
 
@@ -30,6 +32,20 @@ function Header({ fields }: { fields: GridField[] }) {
 }
 
 function Body({ fields, data }: { fields: GridField[]; data: any[] }) {
+  const renderField = (field, row) => {
+    if (field.renderFunction) {
+      return field.renderFunction(row);
+    }
+    if (field.linkTo) {
+      return (
+        <Link className="text-blue-700" to={field.linkTo(row)}>
+          {row[field.name]}
+        </Link>
+      );
+    }
+    return row[field.name];
+  };
+
   return (
     <tbody className="bg-white">
       {data.map((row, index) => (
@@ -39,7 +55,7 @@ function Body({ fields, data }: { fields: GridField[]; data: any[] }) {
               key={`Grid_Row_${index}_${field.name}`}
               className="px-6 py-4 truncate border-b border-gray-200"
             >
-              {field.renderFunction ? field.renderFunction(row) : row[field.name]}
+              {renderField(field, row)}
             </td>
           ))}
         </tr>

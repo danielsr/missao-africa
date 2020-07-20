@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { format as formatCpf } from '@fnando/cpf';
-import { Page, Input, GridEdit, InfiniteScroll } from 'components';
+import { Page, Input, Grid, InfiniteScroll } from 'components';
 import { GridField } from 'components/Grid';
 import LabelGroup from 'components/LabelGroup';
 import useFetch from 'hooks/useFetch';
@@ -13,21 +13,13 @@ import { useLabels } from 'modules/Labels/hooks';
 function People() {
   const { labels } = useLabels();
   const fields: GridField[] = [
-    { name: 'name', label: 'Name' },
+    { name: 'name', label: 'Name', linkTo: (row) => `/people/${row.id}` },
     { name: 'email', label: 'Email' },
-    {
-      name: 'cpf',
-      label: 'CPF',
-      renderFunction(row) {
-        return formatCpf(row.cpf);
-      },
-    },
+    { name: 'cpf', label: 'CPF', renderFunction: (row) => formatCpf(row.cpf) },
     {
       name: 'labels',
       label: 'Labels',
-      renderFunction(row) {
-        return labels && <LabelGroup value={row.labels} labels={labels} />;
-      },
+      renderFunction: (row) => labels && <LabelGroup value={row.labels} labels={labels} />,
     },
   ];
   const [people, fetchPeople] = useFetch(api.getPeople);
@@ -47,7 +39,7 @@ function People() {
         value={search}
         onChange={setSearch}
       />
-      {items && <GridEdit data={items} fields={fields} editRoute="/people" />}
+      {items && <Grid data={items} fields={fields} />}
       <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={nextPage} />
     </Page>
   );
