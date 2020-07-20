@@ -5,19 +5,26 @@ import Routes from '../routes';
 import Toaster from '../components/Toaster';
 import useToaster from '../store/useToaster';
 import { useLabels } from './Labels/hooks';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const { toaster } = useToaster();
   const { loadLabels } = useLabels();
+  const { pathname } = useLocation();
+  const isLoginRoute = pathname === '/login';
 
   useEffect(() => {
-    loadLabels();
+    !isLoginRoute && loadLabels();
   }, []);
 
   return (
     <div className="flex min-h-screen">
-      <TopBar />
-      <SideMenu />
+      {!isLoginRoute && (
+        <>
+          <TopBar />
+          <SideMenu />
+        </>
+      )}
       <Routes />
       {toaster.show && <Toaster text={toaster.text} />}
     </div>

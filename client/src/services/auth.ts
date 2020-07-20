@@ -8,6 +8,12 @@ export function redirectToLoginPage() {
   }, 100);
 }
 
+export function logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  redirectToLoginPage();
+}
+
 export function redirectToReturnUrl() {
   const queryParams = new URLSearchParams(history.location.search);
   history.push(queryParams.get('redirectUrl') ?? '/');
