@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import TopBar from 'components/TopBar';
 import SideMenu from 'components/SideMenu';
-import Routes from '../routes';
-import Toaster from '../components/Toaster';
-import useToaster from '../store/useToaster';
-import { useLabels } from './Labels/hooks';
-import { useLocation } from 'react-router-dom';
+import Routes from 'routes';
+import Toaster from 'components/Toaster';
+import useToaster from 'store/useToaster';
 
 function App() {
   const { toaster } = useToaster();
-  const { loadLabels } = useLabels();
   const { pathname } = useLocation();
   const isLoginRoute = pathname === '/login';
-
-  useEffect(() => {
-    !isLoginRoute && loadLabels();
-  }, []);
 
   return (
     <div className="flex min-h-screen">

@@ -11,7 +11,7 @@ import api from 'services/api';
 import { useLabels } from 'modules/Labels/hooks';
 
 function People() {
-  const { labels } = useLabels();
+  const { labels, loadLabels } = useLabels();
   const fields: GridField[] = [
     { name: 'name', label: 'Name', linkTo: (row) => `/people/${row.id}` },
     { name: 'email', label: 'Email' },
@@ -26,6 +26,10 @@ function People() {
   const { data, isLoading } = people;
   const { nextPage, resetPagination, pageIndex, hasMore, items } = usePagination<Person>(data);
   const { setSearch, search, debouncedSearch } = useSearch(resetPagination);
+
+  useEffect(() => {
+    loadLabels();
+  }, []);
 
   useEffect(() => {
     fetchPeople(debouncedSearch, pageIndex);
