@@ -13,6 +13,11 @@ export enum UserActionTypes {
   Set = 'USER/SET',
 }
 
-export const userActions = {
-  [UserActionTypes.Set]: (state, { user }) => ({ ...state, user: { user } }),
+export const userReducer = (state, action) => {
+  switch (action.type) {
+    case UserActionTypes.Set:
+      return { ...state, user: action.user };
+    default:
+      return state;
+  }
 };

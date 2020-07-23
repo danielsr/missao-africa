@@ -1,18 +1,20 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react';
-import { initialState as toaster, toasterActions } from './toaster';
-import { initialState as labels, labelsActions } from './labels';
-import { initialState as user, userActions } from 'modules/Login/state';
+import { initialState as toaster, toasterReducer } from './toaster';
+import { initialState as labels, labelsReducer } from './labels';
+import { initialState as user, userReducer } from 'modules/Login/state';
 
 const initialState = { toaster, labels, user };
 
-const actions = {
-  ...toasterActions,
-  ...labelsActions,
-  ...userActions,
-};
-
 const reducer = (state, action) => {
-  return actions[action.type]?.(state, action) ?? state;
+  const reducers = {
+    toaster: toasterReducer,
+    labels: labelsReducer,
+    user: userReducer,
+  };
+
+  return Object.keys(reducers).reduce((res, key) => {
+    return { ...res, [key]: reducers[key](res[key], action) };
+  }, state);
 };
 
 const StoreContext = createContext<{

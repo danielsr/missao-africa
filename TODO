@@ -5,9 +5,9 @@
 ## Frontend
 
 [x] People modal when clicking on name, no edit button
-[ ] Label Input component
-[ ] Unique ID Input
+[x] Label Input component
 [ ] Move user state and hook to global store folder
+[ ] Unique ID Input
 [ ] Get done the Import people flow
 [ ] Label ids instead of label name
 [ ] Solve exhaustive-deps warnings

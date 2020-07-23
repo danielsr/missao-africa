@@ -10,7 +10,13 @@ export enum ToasterActionTypes {
   Hide = 'TOASTER/HIDE',
 }
 
-export const toasterActions = {
-  [ToasterActionTypes.Show]: (state, { text }) => ({ ...state, toaster: { show: true, text } }),
-  [ToasterActionTypes.Hide]: (state) => ({ ...state, toaster: { show: false } }),
+export const toasterReducer = (state, action) => {
+  switch (action.type) {
+    case ToasterActionTypes.Show:
+      return { ...state, show: true, text: action.text };
+    case ToasterActionTypes.Hide:
+      return { ...state, show: false, text: null };
+    default:
+      return state;
+  }
 };
