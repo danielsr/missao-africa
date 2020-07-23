@@ -3,8 +3,8 @@ import { LabelsActionTypes } from '../../store/labels';
 import api from 'services/api';
 import { Label } from 'types';
 
-export function useLabels(): { labels: Label[]; loadLabels: Function } {
-  const { state, dispatch } = useStore();
+export function useLabels(): { labels?: Label[]; loadLabels: Function } {
+  const [state, dispatch] = useStore();
 
   const loadLabels = async () => {
     try {
