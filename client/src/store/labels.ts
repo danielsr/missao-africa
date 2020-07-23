@@ -4,7 +4,7 @@ export type LabelsState = {
   labels?: Label[];
 };
 
-export const initialState: LabelsState = {};
+export const labelsInitialState: LabelsState = {};
 
 export enum LabelsActionTypes {
   Load = 'LABELS/LOAD',

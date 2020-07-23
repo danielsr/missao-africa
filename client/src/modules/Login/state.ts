@@ -5,7 +5,7 @@ export type UserState = {
   user?: User;
 };
 
-export const initialState: UserState = {
+export const userInitialState: UserState = {
   user: getUser(),
 };
 

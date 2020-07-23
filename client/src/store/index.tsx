@@ -1,21 +1,26 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react';
-import { initialState as toaster, toasterReducer } from './toaster';
-import { initialState as labels, labelsReducer } from './labels';
-import { initialState as user, userReducer } from 'modules/Login/state';
+import { toasterInitialState, toasterReducer, ToasterState } from './toaster';
+import { labelsInitialState, labelsReducer, LabelsState } from './labels';
+import { userInitialState, userReducer, UserState } from 'modules/Login/state';
+import { combineReducers } from './helper';
 
-const initialState = { toaster, labels, user };
-
-const reducer = (state, action) => {
-  const reducers = {
-    toaster: toasterReducer,
-    labels: labelsReducer,
-    user: userReducer,
-  };
-
-  return Object.keys(reducers).reduce((res, key) => {
-    return { ...res, [key]: reducers[key](res[key], action) };
-  }, state);
+type State = {
+  toaster: ToasterState;
+  labels: LabelsState;
+  user: UserState;
 };
+
+const rootState: State = {
+  toaster: toasterInitialState,
+  labels: labelsInitialState,
+  user: userInitialState,
+};
+
+const rootReducer = combineReducers({
+  toaster: toasterReducer,
+  labels: labelsReducer,
+  user: userReducer,
+});
 
 const StoreContext = createContext<{
   state: any;
@@ -23,7 +28,7 @@ const StoreContext = createContext<{
 }>({ state: {}, dispatch: () => null });
 
 export const StoreProvider = ({ children }: any) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(rootReducer, rootState);
 
   return <StoreContext.Provider value={{ state, dispatch }}>{children}</StoreContext.Provider>;
 };

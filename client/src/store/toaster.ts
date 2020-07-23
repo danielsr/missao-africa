@@ -3,7 +3,7 @@ export type ToasterState = {
   text?: string;
 };
 
-export const initialState: ToasterState = { show: false };
+export const toasterInitialState: ToasterState = { show: false };
 
 export enum ToasterActionTypes {
   Show = 'TOASTER/SHOW',
