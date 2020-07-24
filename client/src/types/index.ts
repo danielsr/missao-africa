@@ -21,3 +21,10 @@ export type User = {
   email: string;
   id: string;
 };
+
+export type Pagination = {
+  pageIndex: number;
+  pageSize: number;
+  totalCount: number;
+  hasMore: boolean;
+};

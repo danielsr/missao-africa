@@ -3,12 +3,9 @@ import { format as formatCpf } from '@fnando/cpf';
 import { Page, Input, Grid, InfiniteScroll } from 'components';
 import { GridField } from 'components/Grid';
 import LabelGroup from 'components/LabelGroup';
-import useFetch from 'hooks/useFetch';
 import useSearch from 'hooks/useSearch';
-import usePagination from 'hooks/usePagination';
-import { Person } from 'types';
-import api from 'services/api';
 import { useLabels } from 'modules/Labels/hooks';
+import { usePeople } from './hooks';
 
 function People() {
   const { labels, loadLabels } = useLabels();
@@ -22,18 +19,16 @@ function People() {
       renderFunction: (row) => labels && <LabelGroup value={row.labels} labels={labels} />,
     },
   ];
-  const [people, fetchPeople] = useFetch(api.getPeople);
-  const { data, isLoading } = people;
-  const { nextPage, resetPagination, pageIndex, hasMore, items } = usePagination<Person>(data);
-  const { setSearch, search, debouncedSearch } = useSearch(resetPagination);
+  const { setSearch, search, debouncedSearch } = useSearch();
+  const { people, loadPeople, loadMore, pagination, isLoading } = usePeople();
 
   useEffect(() => {
     loadLabels();
   }, []);
 
   useEffect(() => {
-    fetchPeople(debouncedSearch, pageIndex);
-  }, [debouncedSearch, pageIndex, fetchPeople]);
+    loadPeople(debouncedSearch);
+  }, [debouncedSearch]);
 
   return (
     <Page title="People" newLabel="New Person" newRoute="/people/0">
@@ -43,8 +38,10 @@ function People() {
         value={search}
         onChange={setSearch}
       />
-      {items && <Grid data={items} fields={fields} />}
-      <InfiniteScroll hasMore={hasMore} isLoading={isLoading} loadMore={nextPage} />
+      {people && <Grid data={people} fields={fields} />}
+      {pagination && (
+        <InfiniteScroll hasMore={pagination.hasMore} isLoading={isLoading} loadMore={loadMore} />
+      )}
     </Page>
   );
 }

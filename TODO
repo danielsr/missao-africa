@@ -6,7 +6,7 @@
 
 [x] People modal when clicking on name, no edit button
 [x] Label Input component
-[ ] Move user state and hook to global store folder
+[x] Move user state and hook to global store folder
 [ ] Unique ID Input
 [ ] Get done the Import people flow
 [ ] Solve exhaustive-deps warnings
