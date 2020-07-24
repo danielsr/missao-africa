@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Input, Button, LinkButton, Spinner, Modal } from 'components';
 import { InputType } from 'components/Input';
 import { ButtonType } from 'components/Button';
 import { useForm } from 'hooks';
-import api from 'services/api';
-import { useToaster } from 'store/toaster/hooks';
 import { useLabels } from 'modules/Labels/hooks';
 import { toDatetimeLocal } from 'util/date';
 import { required, email, cpf } from 'util/validation';
@@ -15,13 +13,9 @@ import LabelInput from 'components/LabelInput';
 import { usePeople } from './hooks';
 
 function PeopleEdit() {
-  const history = useHistory();
   const { id } = useParams();
-  const [saving, setSaving] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const { showToaster } = useToaster();
   const { labels } = useLabels();
-  const { updatePerson } = usePeople();
+  const { savePerson, isSaving, getPerson, isLoading } = usePeople();
 
   const initialValues = {
     submitedAt: toDatetimeLocal(new Date().toUTCString()),
@@ -39,36 +33,15 @@ function PeopleEdit() {
     { name: 'boleto', label: 'Boleto Bancario' },
   ];
 
-  const save = async () => {
-    try {
-      setSaving(true);
-      const { data: person } = await api.savePerson(values);
-      updatePerson(person);
-      history.push('/people');
-      showToaster('People saved!');
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setSaving(false);
-    }
-  };
-
   useEffect(() => {
     const fetchPerson = async () => {
       if (id > 0) {
-        try {
-          setLoading(true);
-          const resp = await api.getPerson(id);
-          setValues(resp.data);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false);
-        }
+        const person = await getPerson(id);
+        setValues(person);
       }
     };
     fetchPerson();
-  }, [id, setValues, setLoading]);
+  }, [id, setValues]);
 
   const renderForm = () => (
     <div>
@@ -113,9 +86,9 @@ function PeopleEdit() {
       <Button
         icon="save"
         label="Save"
-        onClick={save}
+        onClick={() => savePerson(values)}
         className="mr-2"
-        working={saving}
+        working={isSaving}
         disabled={invalid}
       />
       <LinkButton label="Cancel" type={ButtonType.Secondary} to="/people" />
@@ -130,7 +103,7 @@ function PeopleEdit() {
       size={ModalSize.Large}
       closeRoute="/people"
     >
-      {loading ? <Spinner /> : renderContent()}
+      {isLoading ? <Spinner /> : renderContent()}
     </Modal>
   );
 }

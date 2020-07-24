@@ -1,7 +1,9 @@
 import { useStore } from 'store';
 import { PeopleActionTypes } from './state';
 import api from 'services/api';
-import { Pagination } from 'types';
+import { Pagination, Person } from 'types';
+import { useHistory } from 'react-router-dom';
+import { useToaster } from 'store/toaster/hooks';
 
 function getPagination(pagination): Pagination {
   const { pageIndex, pageSize, totalCount } = pagination;
@@ -12,10 +14,17 @@ function getPagination(pagination): Pagination {
 }
 
 export function usePeople() {
+  const history = useHistory();
   const [state, dispatch] = useStore();
+  const { showToaster } = useToaster();
+  const { people, isLoading, isSaving, pagination } = state.people;
 
   const setLoading = (isLoading) => {
     dispatch({ type: PeopleActionTypes.SetLoading, payload: { isLoading } });
+  };
+
+  const setSaving = (isSaving) => {
+    dispatch({ type: PeopleActionTypes.SetSaving, payload: { isSaving } });
   };
 
   const loadPeople = async (search = '', pageIndex = 1, append = false) => {
@@ -37,28 +46,52 @@ export function usePeople() {
   };
 
   const loadMore = () => {
-    const nextPage = (state.people.pagination?.pageIndex || 1) + 1;
+    const nextPage = (pagination?.pageIndex || 1) + 1;
     loadPeople('', nextPage, true);
   };
 
-  const updatePerson = (person) => {
-    const index = state.people.people?.findIndex(({ id }) => id === person.id);
-    if (index && state.people.people) {
-      const people = [
-        ...state.people.people.slice(0, index),
-        person,
-        ...state.people.people.slice(index + 1),
-      ];
-      dispatch({ type: PeopleActionTypes.Load, payload: { people } });
+  const updatePerson = (person: Person) => {
+    const index = people?.findIndex(({ id }) => id === person.id);
+    if (index && people) {
+      const payload = { people: [...people.slice(0, index), person, ...people.slice(index + 1)] };
+      dispatch({ type: PeopleActionTypes.Load, payload });
+    }
+  };
+
+  const savePerson = async (values: Person) => {
+    try {
+      setSaving(true);
+      const { data: person } = await api.savePerson(values);
+      updatePerson(person);
+      history.push('/people');
+      showToaster('People saved!');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const getPerson = async (id: number) => {
+    try {
+      setLoading(true);
+      const { data } = await api.getPerson(id);
+      return data;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return {
-    people: state.people.people,
-    pagination: state.people.pagination,
-    isLoading: state.people.isLoading,
+    people,
+    pagination,
+    isLoading,
+    isSaving,
     loadPeople,
     loadMore,
-    updatePerson,
+    savePerson,
+    getPerson,
   };
 }
