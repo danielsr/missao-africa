@@ -18,7 +18,7 @@ export function usePeople() {
   const history = useHistory();
   const [state, dispatch] = useStore();
   const { showToaster } = useToaster();
-  const { people, isLoading, isSaving, pagination } = state.people;
+  const { people, isLoading, isSaving, pagination, person } = state.people;
 
   const setLoading = useCallback(
     (isLoading) => {
@@ -82,26 +82,33 @@ export function usePeople() {
     }
   };
 
-  const getPerson = async (id: number) => {
-    try {
-      setLoading(true);
-      const { data } = await api.getPerson(id);
-      return data;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const loadPerson = useCallback(
+    (id: number) => {
+      const load = async () => {
+        try {
+          setLoading(true);
+          const { data: person } = await api.getPerson(id);
+          dispatch({ type: PeopleActionTypes.SetPerson, payload: { person } });
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      load();
+    },
+    [dispatch, setLoading]
+  );
 
   return {
     people,
+    person,
     pagination,
     isLoading,
     isSaving,
     loadPeople,
     loadMore,
     savePerson,
-    getPerson,
+    loadPerson,
   };
 }

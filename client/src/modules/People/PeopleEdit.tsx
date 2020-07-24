@@ -15,7 +15,7 @@ import { usePeople } from './hooks';
 function PeopleEdit() {
   const { id } = useParams();
   const { labels } = useLabels();
-  const { savePerson, isSaving, getPerson, isLoading } = usePeople();
+  const { savePerson, isSaving, loadPerson, isLoading, person } = usePeople();
 
   const initialValues = {
     submitedAt: toDatetimeLocal(new Date().toUTCString()),
@@ -34,14 +34,12 @@ function PeopleEdit() {
   ];
 
   useEffect(() => {
-    const fetchPerson = async () => {
-      if (id > 0) {
-        const person = await getPerson(id);
-        setValues(person);
-      }
-    };
-    fetchPerson();
-  }, [id, setValues]);
+    loadPerson(id);
+  }, [id, loadPerson]);
+
+  useEffect(() => {
+    person && setValues(person);
+  }, [person, setValues]);
 
   const renderForm = () => (
     <div>
