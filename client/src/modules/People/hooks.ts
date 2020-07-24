@@ -62,8 +62,11 @@ export function usePeople() {
   };
 
   const updatePerson = (person: Person) => {
-    const index = people?.findIndex(({ id }) => id === person.id);
-    if (index && people) {
+    if (!people) {
+      return;
+    }
+    const index = people.findIndex(({ id }) => id === person.id);
+    if (index > -1) {
       const payload = { people: [...people.slice(0, index), person, ...people.slice(index + 1)] };
       dispatch({ type: PeopleActionTypes.Load, payload });
     }
