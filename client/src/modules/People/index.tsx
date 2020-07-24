@@ -23,15 +23,11 @@ function People() {
 
   useEffect(() => {
     loadLabels();
-  }, []);
+  }, [loadLabels]);
 
   return (
     <Page title="People" newLabel="New Person" newRoute="/people/0">
-      <SearchInput
-        placeHolder="Search people..."
-        className="w-1/2 mb-4"
-        onSearch={(search) => loadPeople(search)}
-      />
+      <SearchInput placeHolder="Search people..." className="w-1/2 mb-4" onSearch={loadPeople} />
       {people && <Grid data={people} fields={fields} />}
       {pagination && (
         <InfiniteScroll hasMore={pagination.hasMore} isLoading={isLoading} loadMore={loadMore} />

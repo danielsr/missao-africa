@@ -1,8 +1,9 @@
+import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useStore } from 'store';
 import { PeopleActionTypes } from './state';
 import api from 'services/api';
 import { Pagination, Person } from 'types';
-import { useHistory } from 'react-router-dom';
 import { useToaster } from 'store/toaster/hooks';
 
 function getPagination(pagination): Pagination {
@@ -19,31 +20,40 @@ export function usePeople() {
   const { showToaster } = useToaster();
   const { people, isLoading, isSaving, pagination } = state.people;
 
-  const setLoading = (isLoading) => {
-    dispatch({ type: PeopleActionTypes.SetLoading, payload: { isLoading } });
-  };
+  const setLoading = useCallback(
+    (isLoading) => {
+      dispatch({ type: PeopleActionTypes.SetLoading, payload: { isLoading } });
+    },
+    [dispatch]
+  );
 
   const setSaving = (isSaving) => {
     dispatch({ type: PeopleActionTypes.SetSaving, payload: { isSaving } });
   };
 
-  const loadPeople = async (search = '', pageIndex = 1, append = false) => {
-    try {
-      setLoading(true);
-      const { data } = await api.getPeople(search, pageIndex);
-      const { items, ...rest } = data;
-      dispatch({
-        type: append ? PeopleActionTypes.Append : PeopleActionTypes.Load,
-        payload: { people: items },
-      });
-      const pagination = getPagination(rest);
-      dispatch({ type: PeopleActionTypes.SetPagination, payload: { pagination } });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const loadPeople = useCallback(
+    (search = '', pageIndex = 1, append = false) => {
+      const load = async () => {
+        try {
+          setLoading(true);
+          const { data } = await api.getPeople(search, pageIndex);
+          const { items, ...rest } = data;
+          dispatch({
+            type: append ? PeopleActionTypes.Append : PeopleActionTypes.Load,
+            payload: { people: items },
+          });
+          const pagination = getPagination(rest);
+          dispatch({ type: PeopleActionTypes.SetPagination, payload: { pagination } });
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      load();
+    },
+    [dispatch, setLoading]
+  );
 
   const loadMore = () => {
     const nextPage = (pagination?.pageIndex || 1) + 1;

@@ -22,7 +22,7 @@ function Labels() {
 
   useEffect(() => {
     loadLabels();
-  }, []);
+  }, [loadLabels]);
 
   return (
     <Page title="Labels" newLabel="New Label" newRoute="/labels/0">

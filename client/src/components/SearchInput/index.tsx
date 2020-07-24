@@ -20,7 +20,7 @@ function SearchInput({ placeHolder, onSearch, className }: PropTypes) {
   useEffect(() => {
     history.replace(`?search=${debouncedSearch}`);
     onSearch(debouncedSearch);
-  }, [debouncedSearch, history]);
+  }, [debouncedSearch, history, onSearch]);
 
   return (
     <Input placeHolder={placeHolder} className={className} value={search} onChange={setSearch} />
