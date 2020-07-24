@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { format as formatCpf } from '@fnando/cpf';
-import { Page, Input, Grid, InfiniteScroll } from 'components';
+import { Page, Grid, InfiniteScroll } from 'components';
+import SearchInput from 'components/SearchInput';
 import { GridField } from 'components/Grid';
 import LabelGroup from 'components/LabelGroup';
-import useSearch from 'hooks/useSearch';
 import { useLabels } from 'modules/Labels/hooks';
 import { usePeople } from './hooks';
 
@@ -19,24 +19,18 @@ function People() {
       renderFunction: (row) => labels && <LabelGroup value={row.labels} labels={labels} />,
     },
   ];
-  const { setSearch, search, debouncedSearch } = useSearch();
   const { people, loadPeople, loadMore, pagination, isLoading } = usePeople();
 
   useEffect(() => {
     loadLabels();
   }, []);
 
-  useEffect(() => {
-    loadPeople(debouncedSearch);
-  }, [debouncedSearch]);
-
   return (
     <Page title="People" newLabel="New Person" newRoute="/people/0">
-      <Input
+      <SearchInput
         placeHolder="Search people..."
         className="w-1/2 mb-4"
-        value={search}
-        onChange={setSearch}
+        onSearch={(search) => loadPeople(search)}
       />
       {people && <Grid data={people} fields={fields} />}
       {pagination && (
