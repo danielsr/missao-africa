@@ -1,5 +1,5 @@
-import { useStore } from '../../store';
-import { LabelsActionTypes } from '../../store/labels';
+import { useStore } from 'store';
+import { LabelsActionTypes } from './state';
 import api from 'services/api';
 import { Label } from 'types';
 

@@ -1,4 +1,4 @@
-import { Label } from '../types';
+import { Label } from 'types';
 
 export type LabelsState = {
   labels?: Label[];

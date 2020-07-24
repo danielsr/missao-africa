@@ -1,7 +1,7 @@
-import { useStore } from '.';
-import { ToasterActionTypes, ToasterState } from './toaster';
+import { useStore } from 'store';
+import { ToasterActionTypes, ToasterState } from '.';
 
-export default function useToaster(): { toaster: ToasterState; showToaster: Function } {
+export function useToaster(): { toaster: ToasterState; showToaster: Function } {
   const [state, dispatch] = useStore();
   return {
     toaster: state.toaster,

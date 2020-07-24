@@ -5,7 +5,7 @@ import { InputType } from 'components/Input';
 import { ButtonType } from 'components/Button';
 import { useForm } from 'hooks';
 import api from 'services/api';
-import useToaster from 'store/useToaster';
+import { useToaster } from 'store/toaster/hooks';
 import { useLabels } from 'modules/Labels/hooks';
 import { toDatetimeLocal } from 'util/date';
 import { required, email, cpf } from 'util/validation';

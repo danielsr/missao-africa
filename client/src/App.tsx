@@ -4,7 +4,7 @@ import TopBar from 'components/TopBar';
 import SideMenu from 'components/SideMenu';
 import Routes from 'routes';
 import Toaster from 'components/Toaster';
-import useToaster from 'store/useToaster';
+import { useToaster } from 'store/toaster/hooks';
 
 function App() {
   const { toaster } = useToaster();

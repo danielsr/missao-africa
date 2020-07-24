@@ -4,7 +4,7 @@ import { Input, Button, Modal } from 'components';
 import { InputType } from 'components/Input';
 import api from 'services/api';
 import { setToken, redirectToReturnUrl } from 'services/auth';
-import useUser from './hooks';
+import { useUser } from 'store/user/hooks';
 import { ModalSize } from 'components/Modal';
 
 function Login() {

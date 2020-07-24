@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Button, Input } from 'components';
 import useForm from 'hooks/useForm';
 import api from 'services/api';
-import useToaster from 'store/useToaster';
+import { useToaster } from 'store/toaster/hooks';
 import { useLabels } from './hooks';
 import { InputType } from 'components/Input';
 import Modal, { ModalSize } from 'components/Modal';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logo from 'assets/img/logo.png';
 import style from './style.module.scss';
 import Icon from 'components/Icon';
-import useUser from 'modules/Login/hooks';
+import { useUser } from 'store/user/hooks';
 import { logout } from 'services/auth';
 
 function ContextMenu() {

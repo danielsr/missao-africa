@@ -1,7 +1,12 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react';
 import { toasterInitialState, toasterReducer, ToasterState, ToasterActionTypes } from './toaster';
-import { labelsInitialState, labelsReducer, LabelsState, LabelsActionTypes } from './labels';
-import { userInitialState, userReducer, UserState, UserActionTypes } from 'modules/Login/state';
+import {
+  labelsInitialState,
+  labelsReducer,
+  LabelsState,
+  LabelsActionTypes,
+} from 'modules/Labels/state';
+import { userInitialState, userReducer, UserState, UserActionTypes } from './user';
 import { combineReducers } from './helper';
 
 type State = {
