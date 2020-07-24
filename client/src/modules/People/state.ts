@@ -6,6 +6,7 @@ export type PeopleState = {
   isSaving: boolean;
   pagination?: Pagination;
   person?: Person;
+  search?: string;
 };
 
 export const peopleInitialState: PeopleState = { isLoading: false, isSaving: false };
@@ -17,6 +18,7 @@ export enum PeopleActionTypes {
   SetSaving = 'PEOPLE/SET_SAVING',
   SetPagination = 'PEOPLE/SET_PAGINATION',
   SetPerson = 'PEOPLE/SET_PERSON',
+  SetSearch = 'PEOPLE/SET_SEARCH',
 }
 
 export const peopleReducer = (state, action) => {
@@ -34,6 +36,8 @@ export const peopleReducer = (state, action) => {
       return { ...state, pagination: payload.pagination };
     case PeopleActionTypes.SetPerson:
       return { ...state, person: payload.person };
+    case PeopleActionTypes.SetSearch:
+      return { ...state, search: payload.search };
     default:
       return state;
   }

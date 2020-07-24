@@ -18,7 +18,7 @@ export function usePeople() {
   const history = useHistory();
   const [state, dispatch] = useStore();
   const { showToaster } = useToaster();
-  const { people, isLoading, isSaving, pagination, person } = state.people;
+  const { people, isLoading, isSaving, pagination, person, search } = state.people;
 
   const setLoading = useCallback(
     (isLoading) => {
@@ -42,6 +42,7 @@ export function usePeople() {
             type: append ? PeopleActionTypes.Append : PeopleActionTypes.Load,
             payload: { people: items },
           });
+          dispatch({ type: PeopleActionTypes.SetSearch, payload: { search } });
           const pagination = getPagination(rest);
           dispatch({ type: PeopleActionTypes.SetPagination, payload: { pagination } });
         } catch (error) {
@@ -57,7 +58,7 @@ export function usePeople() {
 
   const loadMore = () => {
     const nextPage = (pagination?.pageIndex || 1) + 1;
-    loadPeople('', nextPage, true);
+    loadPeople(search, nextPage, true);
   };
 
   const updatePerson = (person: Person) => {

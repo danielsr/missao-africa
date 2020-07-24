@@ -16,6 +16,7 @@ function PeopleEdit() {
   const { id } = useParams();
   const { labels } = useLabels();
   const { savePerson, isSaving, loadPerson, isLoading, person } = usePeople();
+  const isEditing = id > 0;
 
   const initialValues = {
     submitedAt: toDatetimeLocal(new Date().toUTCString()),
@@ -34,12 +35,12 @@ function PeopleEdit() {
   ];
 
   useEffect(() => {
-    loadPerson(id);
-  }, [id, loadPerson]);
+    isEditing && loadPerson(id);
+  }, [isEditing, id, loadPerson]);
 
   useEffect(() => {
-    person && setValues(person);
-  }, [person, setValues]);
+    isEditing && person && setValues(person);
+  }, [person, setValues, isEditing]);
 
   const renderForm = () => (
     <div>
