@@ -6,7 +6,7 @@ export default function useToaster(): { toaster: ToasterState; showToaster: Func
   return {
     toaster: state.toaster,
     showToaster: (text) => {
-      dispatch({ type: ToasterActionTypes.Show, text });
+      dispatch({ type: ToasterActionTypes.Show, payload: { text } });
       setTimeout(() => dispatch({ type: ToasterActionTypes.Hide }), 3000);
     },
   };

@@ -8,7 +8,7 @@ export default function useUser(): { user?: User; setUser: Function } {
   return {
     user: state.user.user,
     setUser: (user) => {
-      dispatch({ type: UserActionTypes.Set, user });
+      dispatch({ type: UserActionTypes.Set, payload: { user } });
       setUserLocalStorage(user);
     },
   };

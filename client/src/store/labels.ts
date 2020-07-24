@@ -11,9 +11,10 @@ export enum LabelsActionTypes {
 }
 
 export const labelsReducer = (state, action) => {
+  const { payload } = action;
   switch (action.type) {
     case LabelsActionTypes.Load:
-      return { ...state, labels: action.labels };
+      return { ...state, labels: payload.labels };
     default:
       return state;
   }

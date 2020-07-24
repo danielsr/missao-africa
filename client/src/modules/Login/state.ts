@@ -14,9 +14,10 @@ export enum UserActionTypes {
 }
 
 export const userReducer = (state, action) => {
+  const { payload } = action;
   switch (action.type) {
     case UserActionTypes.Set:
-      return { ...state, user: action.user };
+      return { ...state, user: payload.user };
     default:
       return state;
   }

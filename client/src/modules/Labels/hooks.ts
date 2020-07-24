@@ -9,7 +9,7 @@ export function useLabels(): { labels?: Label[]; loadLabels: Function } {
   const loadLabels = async () => {
     try {
       const { data } = await api.getLabels();
-      dispatch({ type: LabelsActionTypes.Load, labels: data });
+      dispatch({ type: LabelsActionTypes.Load, payload: { labels: data } });
     } catch (error) {
       console.log(error);
     }
