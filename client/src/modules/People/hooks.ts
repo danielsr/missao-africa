@@ -41,11 +41,24 @@ export function usePeople() {
     loadPeople('', nextPage, true);
   };
 
+  const updatePerson = (person) => {
+    const index = state.people.people?.findIndex(({ id }) => id === person.id);
+    if (index && state.people.people) {
+      const people = [
+        ...state.people.people.slice(0, index),
+        person,
+        ...state.people.people.slice(index + 1),
+      ];
+      dispatch({ type: PeopleActionTypes.Load, payload: { people } });
+    }
+  };
+
   return {
     people: state.people.people,
     pagination: state.people.pagination,
     isLoading: state.people.isLoading,
     loadPeople,
     loadMore,
+    updatePerson,
   };
 }

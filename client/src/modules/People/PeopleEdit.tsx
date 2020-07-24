@@ -12,6 +12,7 @@ import { required, email, cpf } from 'util/validation';
 import { ModalSize } from 'components/Modal';
 import Tabs, { Tab } from 'components/Tabs';
 import LabelInput from 'components/LabelInput';
+import { usePeople } from './hooks';
 
 function PeopleEdit() {
   const history = useHistory();
@@ -20,6 +21,7 @@ function PeopleEdit() {
   const [loading, setLoading] = useState(false);
   const { showToaster } = useToaster();
   const { labels } = useLabels();
+  const { updatePerson } = usePeople();
 
   const initialValues = {
     submitedAt: toDatetimeLocal(new Date().toUTCString()),
@@ -40,7 +42,8 @@ function PeopleEdit() {
   const save = async () => {
     try {
       setSaving(true);
-      await api.savePerson(values);
+      const { data: person } = await api.savePerson(values);
+      updatePerson(person);
       history.push('/people');
       showToaster('People saved!');
     } catch (error) {

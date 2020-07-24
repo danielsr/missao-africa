@@ -1,4 +1,5 @@
 export type Person = {
+  id?: number;
   submitedAt?: Date | null;
   name: string;
   cpf: string;
