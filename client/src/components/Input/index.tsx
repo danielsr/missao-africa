@@ -1,5 +1,5 @@
 import React from 'react';
-import { toDatetimeLocal } from 'util/date';
+import { toDatetimeLocal } from 'lib/date';
 
 export enum InputType {
   text = 'text',

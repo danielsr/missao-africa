@@ -1,26 +1,15 @@
-## Backend
+## TODO
 
-[ ] Serve built client files with Express
-
-## Frontend
-
-[x] People modal when clicking on name, no edit button
-[x] Label Input component
-[x] Move user state and hook to global store folder
-[ ] Unique ID Input
+[x] Extract function to update the state
 [ ] Get done the Import people flow
-[ ] Solve exhaustive-deps warnings
-[ ] Organize styles
+[ ] Context menu
 [ ] Delete sponsor
-[ ] Tailwind bundle size
 [ ] Change password
 [ ] Setup page
 [ ] Users module
-
-## DevOps
-
+[ ] Organize styles
+[ ] Tailwind bundle size
+[ ] Unique ID Input
+[ ] Serve built client files with Express
 [ ] Deploy to heroku
-
-## General
-
 [ ] Boleto bancario API docs

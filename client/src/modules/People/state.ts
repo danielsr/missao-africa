@@ -1,4 +1,5 @@
 import { Person, Pagination } from 'types';
+import { getUpdatedArray } from 'lib';
 
 export type PeopleState = {
   people?: Person[];
@@ -19,15 +20,19 @@ export enum PeopleActionTypes {
   SetPagination = 'PEOPLE/SET_PAGINATION',
   SetPerson = 'PEOPLE/SET_PERSON',
   SetSearch = 'PEOPLE/SET_SEARCH',
+  UpdatePeople = 'PEOPLE/UPDATE_PEOPLE',
 }
 
-export const peopleReducer = (state, action) => {
+export const peopleReducer = (state: PeopleState, action) => {
   const { payload } = action;
   switch (action.type) {
     case PeopleActionTypes.Load:
       return { ...state, people: payload.people };
     case PeopleActionTypes.Append:
-      return { ...state, people: [...state.people, ...payload.people] };
+      return {
+        ...state,
+        people: state.people ? [...state.people, ...payload.people] : payload.people,
+      };
     case PeopleActionTypes.SetLoading:
       return { ...state, isLoading: payload.isLoading };
     case PeopleActionTypes.SetSaving:
@@ -38,6 +43,11 @@ export const peopleReducer = (state, action) => {
       return { ...state, person: payload.person };
     case PeopleActionTypes.SetSearch:
       return { ...state, search: payload.search };
+    case PeopleActionTypes.UpdatePeople:
+      return {
+        ...state,
+        people: state.people && getUpdatedArray<Person>(state.people, payload.person),
+      };
     default:
       return state;
   }

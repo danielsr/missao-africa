@@ -3,16 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { useStore } from 'store';
 import { PeopleActionTypes } from './state';
 import api from 'services/api';
-import { Pagination, Person } from 'types';
+import { Person } from 'types';
 import { useToaster } from 'store/toaster/hooks';
-
-function getPagination(pagination): Pagination {
-  const { pageIndex, pageSize, totalCount } = pagination;
-  const lastPage = totalCount / pageSize;
-  const hasMore = lastPage > pageIndex;
-
-  return { pageIndex, pageSize, totalCount, hasMore };
-}
+import { getPagination } from 'lib';
 
 export function usePeople() {
   const history = useHistory();
@@ -61,22 +54,15 @@ export function usePeople() {
     loadPeople(search, nextPage, true);
   };
 
-  const updatePerson = (person: Person) => {
-    if (!people) {
-      return;
-    }
-    const index = people.findIndex(({ id }) => id === person.id);
-    if (index > -1) {
-      const payload = { people: [...people.slice(0, index), person, ...people.slice(index + 1)] };
-      dispatch({ type: PeopleActionTypes.Load, payload });
-    }
+  const updatePeople = (personUpdated: Person) => {
+    dispatch({ type: PeopleActionTypes.UpdatePeople, payload: { person: personUpdated } });
   };
 
   const savePerson = async (values: Person) => {
     try {
       setSaving(true);
-      const { data: person } = await api.savePerson(values);
-      updatePerson(person);
+      const { data: personUpdated } = await api.savePerson(values);
+      updatePeople(personUpdated);
       history.push('/people');
       showToaster('People saved!');
     } catch (error) {
