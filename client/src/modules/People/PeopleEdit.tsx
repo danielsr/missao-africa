@@ -10,12 +10,12 @@ import { required, email, cpf } from 'lib/validation';
 import { ModalSize } from 'components/Modal';
 import Tabs, { Tab } from 'components/Tabs';
 import LabelInput from 'components/LabelInput';
-import { usePeople } from './hooks';
+import { usePerson } from './hooks';
 
 function PeopleEdit() {
   const { id } = useParams();
   const { labels } = useLabels();
-  const { savePerson, isSaving, loadPerson, isLoading, person } = usePeople();
+  const { savePerson, isSaving, loadPerson, isLoading, person } = usePerson();
   const isEditing = id > 0;
 
   const initialValues = {

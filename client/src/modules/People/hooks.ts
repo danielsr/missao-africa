@@ -8,10 +8,8 @@ import { useToaster } from 'store/toaster/hooks';
 import { getPagination } from 'lib';
 
 export function usePeople() {
-  const history = useHistory();
   const [state, dispatch] = useStore();
-  const { showToaster } = useToaster();
-  const { people, isLoading, isSaving, pagination, person, search } = state.people;
+  const { people, isLoading, pagination, search } = state.people;
 
   const setLoading = useCallback(
     (isLoading) => {
@@ -19,10 +17,6 @@ export function usePeople() {
     },
     [dispatch]
   );
-
-  const setSaving = (isSaving) => {
-    dispatch({ type: PeopleActionTypes.SetSaving, payload: { isSaving } });
-  };
 
   const loadPeople = useCallback(
     (search = '', pageIndex = 1, append = false) => {
@@ -52,6 +46,32 @@ export function usePeople() {
   const loadMore = () => {
     const nextPage = (pagination?.pageIndex || 1) + 1;
     loadPeople(search, nextPage, true);
+  };
+
+  return {
+    people,
+    pagination,
+    isLoading,
+    loadPeople,
+    loadMore,
+  };
+}
+
+export function usePerson() {
+  const history = useHistory();
+  const [state, dispatch] = useStore();
+  const { showToaster } = useToaster();
+  const { isLoading, isSaving, pagination, person } = state.people;
+
+  const setLoading = useCallback(
+    (isLoading) => {
+      dispatch({ type: PeopleActionTypes.SetLoading, payload: { isLoading } });
+    },
+    [dispatch]
+  );
+
+  const setSaving = (isSaving) => {
+    dispatch({ type: PeopleActionTypes.SetSaving, payload: { isSaving } });
   };
 
   const updatePeople = (personUpdated: Person) => {
@@ -91,13 +111,10 @@ export function usePeople() {
   );
 
   return {
-    people,
     person,
     pagination,
     isLoading,
     isSaving,
-    loadPeople,
-    loadMore,
     savePerson,
     loadPerson,
   };

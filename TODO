@@ -1,8 +1,8 @@
 ## TODO
 
 [x] Extract function to update the state
-[ ] Split People hooks
-[ ] Context menu
+[x] Split People hooks
+[x] Context menu
 [ ] Get done the Import people flow
 [ ] Delete sponsor
 [ ] Change password
