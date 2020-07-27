@@ -1,3 +1,8 @@
+export type PersonValidationErrors = {
+  cpf?: string;
+  email?: string;
+};
+
 export type Person = {
   id?: number;
   submitedAt?: Date | null;
@@ -8,6 +13,7 @@ export type Person = {
   address: string;
   notes: string;
   locale: string;
+  validationErrors?: PersonValidationErrors;
 };
 
 export type Label = {

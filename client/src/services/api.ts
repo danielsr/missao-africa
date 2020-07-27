@@ -26,4 +26,9 @@ export default {
   saveLabel(label: Label) {
     return axios.post('/labels', label);
   },
+  checkEmail(email: string) {
+    const query = new URLSearchParams();
+    query.append('email', email);
+    return axios.get(`/persons/check-email?${query.toString()}`);
+  },
 };

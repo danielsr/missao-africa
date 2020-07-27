@@ -10,6 +10,12 @@ export default [
     },
     {
         method: 'get',
+        route: '/persons/check-email',
+        controller: PersonController.checkEmail,
+        middlewares: [checkJwt],
+    },
+    {
+        method: 'get',
         route: '/persons/:id',
         controller: PersonController.one,
         middlewares: [checkJwt],

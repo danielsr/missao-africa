@@ -15,6 +15,14 @@ export default class PersonController {
         return paginate(req, queryBuilder);
     }
 
+    static async checkEmail(req: Request, res: Response, next: NextFunction) {
+        const repo = getRepository(Person);
+        const email = req.query.email.toString().toLowerCase();
+        const queryBuilder = repo.createQueryBuilder('persons').where('LOWER(persons.email) = :email', { email });
+        const count = await queryBuilder.getCount();
+        return { exists: count > 0 };
+    }
+
     static async one(req: Request, res: Response, next: NextFunction) {
         const repo = getRepository(Person);
         const person = await repo.findOne(req.params.id);

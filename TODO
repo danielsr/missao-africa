@@ -1,13 +1,10 @@
 ## TODO
 
-[x] Extract function to update the state
-[x] Split People hooks
-[x] Context menu
-[ ] Get done the Import people flow
-[ ] Delete sponsor
+[x] Get done the Import people flow
+[ ] Delete person
+[ ] Users module
 [ ] Change password
 [ ] Setup page
-[ ] Users module
 [ ] Organize styles
 [ ] Tailwind bundle size
 [ ] Unique ID Input
