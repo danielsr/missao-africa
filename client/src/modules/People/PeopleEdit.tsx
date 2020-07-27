@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Input, Button, LinkButton, Spinner, Modal } from 'components';
+import { Input, Button, LinkButton, Spinner, Modal, ConfirmModal } from 'components';
 import { InputType } from 'components/Input';
 import { ButtonType } from 'components/Button';
 import { useForm } from 'hooks';
@@ -13,6 +13,7 @@ import LabelInput from 'components/LabelInput';
 import { usePerson } from './hooks';
 
 function PeopleEdit() {
+  const [isDeleting, setIsDeleting] = useState(false);
   const { id } = useParams();
   const { labels } = useLabels();
   const { savePerson, isSaving, loadPerson, isLoading, person } = usePerson();
@@ -91,6 +92,13 @@ function PeopleEdit() {
         disabled={invalid}
       />
       <LinkButton label="Cancel" type={ButtonType.Secondary} to="/people" />
+      <Button
+        icon="delete"
+        label="Delete"
+        className="ml-16"
+        type={ButtonType.Warning}
+        onClick={() => setIsDeleting(true)}
+      />
     </>
   );
 
@@ -103,6 +111,11 @@ function PeopleEdit() {
       closeRoute="/people"
     >
       {isLoading ? <Spinner /> : renderContent()}
+      {isDeleting && (
+        <ConfirmModal onConfirm={() => null} onCancel={() => setIsDeleting(false)}>
+          Are you sure you want to delete this person?
+        </ConfirmModal>
+      )}
     </Modal>
   );
 }

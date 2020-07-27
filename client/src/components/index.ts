@@ -9,3 +9,4 @@ export { default as Block } from './Block';
 export { default as LabelGroup } from './LabelGroup';
 export { default as Spinner } from './Spinner';
 export { default as Modal } from './Modal';
+export { default as ConfirmModal } from './Modal/ConfirmModal';

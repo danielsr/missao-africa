@@ -7,6 +7,7 @@ import Spinner, { SpinnerSize, SpinnerColor } from 'components/Spinner';
 export enum ButtonType {
   Primary = 'Primary',
   Secondary = 'Secondary',
+  Warning = 'Warning',
 }
 
 type PropTypes = {
@@ -36,6 +37,9 @@ function Button({
     },
     {
       'bg-gray-700 hover:bg-gray-600': type === ButtonType.Secondary,
+    },
+    {
+      'bg-red-700 hover:bg-red-600': type === ButtonType.Warning,
     },
     {
       'opacity-75 cursor-not-allowed': disabled,
