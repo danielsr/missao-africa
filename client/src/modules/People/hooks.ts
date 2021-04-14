@@ -1,59 +1,31 @@
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useInfiniteQuery } from 'react-query';
 import { useStore } from 'store';
 import { PeopleActionTypes } from './state';
 import api from 'services/api';
 import { Person } from 'types';
 import { useToaster } from 'store/toaster/hooks';
-import { getPagination } from 'lib';
 
 export function usePeople() {
-  const [state, dispatch] = useStore();
-  const { people, isLoading, pagination, search } = state.people;
-
-  const setLoading = useCallback(
-    (isLoading) => {
-      dispatch({ type: PeopleActionTypes.SetLoading, payload: { isLoading } });
+  const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    'people',
+    async ({ pageParam = 1 }) => {
+      const res = await api.getPeople('', pageParam);
+      return res.data;
     },
-    [dispatch]
+    {
+      getNextPageParam: ({ pageSize, pageIndex }) => {
+        return pageIndex < pageSize ? pageIndex + 1 : false;
+      },
+    }
   );
-
-  const loadPeople = useCallback(
-    (search = '', pageIndex = 1, append = false) => {
-      const load = async () => {
-        try {
-          setLoading(true);
-          const { data } = await api.getPeople(search, pageIndex);
-          const { items, ...rest } = data;
-          dispatch({
-            type: append ? PeopleActionTypes.Append : PeopleActionTypes.Load,
-            payload: { people: items },
-          });
-          dispatch({ type: PeopleActionTypes.SetSearch, payload: { search } });
-          const pagination = getPagination(rest);
-          dispatch({ type: PeopleActionTypes.SetPagination, payload: { pagination } });
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false);
-        }
-      };
-      load();
-    },
-    [dispatch, setLoading]
-  );
-
-  const loadMore = () => {
-    const nextPage = (pagination?.pageIndex || 1) + 1;
-    loadPeople(search, nextPage, true);
-  };
 
   return {
-    people,
-    pagination,
-    isLoading,
-    loadPeople,
-    loadMore,
+    people: data?.pages.flatMap((item) => item.items),
+    isFetching,
+    fetchNextPage,
+    hasNextPage: hasNextPage || false,
   };
 }
 

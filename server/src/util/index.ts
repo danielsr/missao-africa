@@ -2,7 +2,7 @@ import { Request } from 'express';
 import { SelectQueryBuilder } from 'typeorm';
 
 export async function paginate<T>(req: Request, queryBuilder: SelectQueryBuilder<T>) {
-    const pageSize = 50;
+    const pageSize = 2;
     const pageIndex = req.query.pageIndex ? parseInt(req.query.pageIndex.toString()) : 1;
     const result = await queryBuilder
         .skip(pageSize * (pageIndex - 1))

@@ -1,7 +1,7 @@
 import React from 'react';
 import { format as formatCpf } from '@fnando/cpf';
 import { Page, Grid, InfiniteScroll } from 'components';
-import SearchInput from 'components/SearchInput';
+// import SearchInput from 'components/SearchInput';
 import { GridField } from 'components/Grid';
 import LabelGroup from 'components/LabelGroup';
 import { useLabels } from 'modules/Labels/hooks';
@@ -19,15 +19,13 @@ function People() {
       renderFunction: (row) => labels && <LabelGroup value={row.labels} labels={labels} />,
     },
   ];
-  const { people, loadPeople, loadMore, pagination, isLoading } = usePeople();
+  const { people, fetchNextPage, isFetching, hasNextPage } = usePeople();
 
   return (
     <Page title="People" newLabel="New Person" newRoute="/people/0">
-      <SearchInput placeHolder="Search people..." className="w-1/2 mb-4" onSearch={loadPeople} />
+      {/* <SearchInput placeHolder="Search people..." className="w-1/2 mb-4" onSearch={loadPeople} /> */}
       {people && <Grid data={people} fields={fields} />}
-      {pagination && (
-        <InfiniteScroll hasMore={pagination.hasMore} isLoading={isLoading} loadMore={loadMore} />
-      )}
+      <InfiniteScroll hasMore={hasNextPage} isLoading={isFetching} loadMore={fetchNextPage} />
     </Page>
   );
 }
