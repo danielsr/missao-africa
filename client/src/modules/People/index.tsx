@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { format as formatCpf } from '@fnando/cpf';
 import { Page, Grid, InfiniteScroll } from 'components';
 import SearchInput from 'components/SearchInput';
@@ -8,7 +8,7 @@ import { useLabels } from 'modules/Labels/hooks';
 import { usePeople } from './hooks';
 
 function People() {
-  const { labels, loadLabels } = useLabels();
+  const { labels } = useLabels();
   const fields: GridField[] = [
     { name: 'name', label: 'Name', linkTo: (row) => `/people/${row.id}` },
     { name: 'email', label: 'Email' },
@@ -20,10 +20,6 @@ function People() {
     },
   ];
   const { people, loadPeople, loadMore, pagination, isLoading } = usePeople();
-
-  useEffect(() => {
-    loadLabels();
-  }, [loadLabels]);
 
   return (
     <Page title="People" newLabel="New Person" newRoute="/people/0">

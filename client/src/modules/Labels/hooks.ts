@@ -1,26 +1,34 @@
-import { useCallback } from 'react';
-import { useStore } from 'store';
-import { LabelsActionTypes } from './state';
+import { AxiosResponse } from 'axios';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useHistory } from 'react-router';
 import api from 'services/api';
+import { useToaster } from 'store/toaster/hooks';
 import { Label } from 'types';
 
-export function useLabels(): { labels?: Label[]; loadLabels: Function } {
-  const [state, dispatch] = useStore();
+export function useLabels() {
+  const { data } = useQuery<AxiosResponse<Label[]>, Error>('labels', api.getLabels, {
+    staleTime: 1000 * 60,
+  });
 
-  const loadLabels = useCallback(() => {
-    const load = async () => {
-      try {
-        const { data } = await api.getLabels();
-        dispatch({ type: LabelsActionTypes.Load, payload: { labels: data } });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    load();
-  }, [dispatch]);
+  return { labels: data?.data };
+}
 
-  return {
-    labels: state.labels.labels,
-    loadLabels,
-  };
+export function useLabel() {
+  const queryClient = useQueryClient();
+  const history = useHistory();
+  const { showToaster } = useToaster();
+
+  const { mutate, isLoading } = useMutation(api.saveLabel, {
+    onSuccess: () => {
+      history.push('/labels');
+      showToaster('Label saved!');
+      queryClient.invalidateQueries('labels');
+    },
+    onError: (error: Error) => {
+      history.push('/labels');
+      showToaster(error.message);
+    },
+  });
+
+  return { mutate, isLoading };
 }

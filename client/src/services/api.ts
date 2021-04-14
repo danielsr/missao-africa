@@ -1,5 +1,6 @@
 import axios from './axiosConfig';
 import { Person, Label } from '../types';
+import { AxiosResponse } from 'axios';
 
 export default {
   importPeople(people: Person[]) {
@@ -20,7 +21,7 @@ export default {
   login(payload) {
     return axios.post(`/login`, payload);
   },
-  getLabels() {
+  getLabels(): Promise<AxiosResponse<Label[]>> {
     return axios.get('/labels');
   },
   saveLabel(label: Label) {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { GridField } from 'components/Grid';
 import { Page, Grid } from 'components';
 import { useLabels } from './hooks';
@@ -6,7 +6,7 @@ import Label from 'components/Label';
 import { Link } from 'react-router-dom';
 
 function Labels() {
-  const { labels, loadLabels } = useLabels();
+  const { labels } = useLabels();
   const fields: GridField[] = [
     {
       name: 'name',
@@ -19,10 +19,6 @@ function Labels() {
     },
     { name: 'description', label: 'Description' },
   ];
-
-  useEffect(() => {
-    loadLabels();
-  }, [loadLabels]);
 
   return (
     <Page title="Labels" newLabel="New Label" newRoute="/labels/0">
